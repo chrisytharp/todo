@@ -1,0 +1,53 @@
+!! YARA: hexadecimal strings, text strings and regular expressions!!
+
+--- syntax that resembles the C languag
+
+---rule dummy
+   {
+       condition:
+          false
+   }
+
+---YARA starts with the keyword rule followed by a rule identifier. Identifiers must follow the same lexical conventions of the C programming language, they can contain any alphanumeric character and the underscore character, but the first character can not be a digit. Rule identifiers are CASE SENSITIVE and cannot exceed 128 characters.
+
+---Rules are generally composed of two sections: STRING DEFINITAION & CONDITION
+
+--he strings definition section can be omitted if the rule doesn’t rely on any string, but the condition section is always required
+
+--- Each string has an identifier consisting of a $ character followed by a sequence of alphanumeric characters and underscores, 
+
+--Text strings are enclosed in double quotes just like in the C language. Hex strings are enclosed by curly brackets, and they are composed by a sequence of hexadecimal numbers that can appear contiguously or separated by spaces. Decimal numbers are not allowed in hex strings.
+
+---three types of STRINGS in YARA: hexadecimal strings, text strings and regular expressions.
+
+---Text strings in YARA are case-sensitive by default, however you can turn your string into case-insensitive 
+
+--- rule CaseInsensitiveTextExample
+   {
+       strings:
+           $text_string = "foobar" nocase
+
+       condition:
+           $text_string
+   }
+
+https://yara.readthedocs.io/en/v3.8.1/writingrules.html#
+
+https://yara.readthedocs.io/en/v3.4.0/yarapython.html
+
+
+metadata identifiers are always followed by an equals sign and the value assigned to them. The assigned values can be strings, integers, or one of the boolean values
+anatomy of yarn rules
+https://attack.mitre.org/groups/
+https://github.com/InQuest/awesome-yara
+https://github.com/Neo23x0/Loki/releases
+https://www.nextron-systems.com/thor-lite/
+better that thor or loki is
+better that thor or loki is
+https://github.com/Neo23x0/Fenrir
+probably best
+probably best
+https://www.eff.org/deeplinks/2020/09/introducing-yaya-new-threat-hunting-tool-eff-threat-lab
+What is yarGen? yarGen is a generator for YARA rules.
+just go back and make a yara page
+sign up

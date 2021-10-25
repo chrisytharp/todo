@@ -1,0 +1,16 @@
+Maltego. Maltego is a product of Paterva
+	data in - can manually enter or, import xls /csv (one ex. copy and paste xls cells into graph-then run 	transforms on them), or run transforms
+		Transform- (mine data with trnsform): can add thrid party add-ons (threat intel transforms)
+  			create entity(movie mad max)- right click and use movie transform(w/ API key) and this will 			auto search and will add aditinal info by linkinf it to the entity
+
+spiderfoot
+MISP (malware infor and sharing platform)
+https://spyse.com/  (internet assets registry)
+https://www.geocreepy.com/    Creepy is an open-source Geolocation intelligence tool
+MineMeld
+	MineMeld is a threat intelligence processing tool that extracts indicators from various sources and compiles the indicators into multiple formats compatible with AutoFocus, the Palo Alto Networks® next-generation firewall, and other security and information event management (SIEM) platforms. Introduction to MineMeld.
+
+other?:
+	procmon + pcap (into procdot) gives you a map pplop visual
+
+Diamond Model is an approach to conducting intelligence on network intrusion events. The model gets its name (and shape) from the four core interconnected elements that comprise any event – adversary, infrastructure, capability, and victim

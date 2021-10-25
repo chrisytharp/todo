@@ -1,0 +1,11 @@
+Information Sharing and Analysis Centers
+cyber analytics repository
+https://attack.mitre.org/groups/
+base-16 numbering system (hex)
+
+strings somefile.txt | wc -l
+wc = word count
+
+https://threatconnect.com
+and
+https://otx.alienvault.com/
