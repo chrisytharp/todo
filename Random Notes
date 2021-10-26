@@ -1,0 +1,5 @@
+strings somefile.txt | wc -l
+wc = word count
+base 16 numbering system HEX
+base64 --decode <file/chars> | tee outputfile.txt
+procmon + pcap (into procdot) gives you a map pplop visual
