@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-Reverse Shell
+Reverse Shell    PAYLOAD OF ALL THINGS https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 remote server to either send us command line access to the server (a reverse shell), or to open up a port on the server which we can connect to in order to 
 execute further commands (a bind shell).
