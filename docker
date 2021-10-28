@@ -1,0 +1,42 @@
+docker image ls
+docker rmi docker/getting-started
+docker run -it --name skiptracer xshuden/skiptracerz
+
+
+
+HostInfo hostname and Files full_name where HostInfo hostname equals "AL001ACODMB01" and Files name contains "mssecsvc.exe"
+
+
+C:\Windows\mssecsvc.exe
+-------------------------
+RUN Powershell
+> pwsh
+
+UPDATE
+brew update
+brew upgrade powershell --cask
+
+
+Cd Metasploit-framework
+./docker/bin/msfconsole
+
+
+File in XML format exported to /Users/christophertharp/.set/reports/2020-09-30 11:03:07.113560.xml for your reading pleasure
+
+Usage
+To identify capabilities in a program run capa and specify the input file:
+
+$ capa suspicious.exe
+
+capa supports Windows PE files (EXE, DLL, SYS) and shellcode. To run capa on a shellcode file you must explicitly specify the file format and architecture, for example to analyze 32-bit shellcode:
+
+$ capa -f sc32 shellcode.bin
+To obtain detailed information on identified capabilities, capa supports two additional verbosity levels. To get the most detailed output on where and why capa matched on rules use the very verbose option:
+
+$ capa -vv suspicious.exe
+If you only want to focus on specific rules you can use the tag option to filter on fields in the rule meta section:
+
+$ capa -t "create TCP socket" suspicious.exe
+Display capa’s help to see all supported options and consolidate the documentation:
+
+$ capa -h
