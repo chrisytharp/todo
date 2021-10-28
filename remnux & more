@@ -10,3 +10,62 @@ sudo systemctl disable systemd-resolved
 docker run --rm -it -u remnux -v ~/:/home/remnux/files remnux/remnux-distro bash
 
 
+
+
+
+setup up minimal ubuntu 18.04 qnd install by wget
+
+remnux --addon (installs on an existing 18.04)
+
+Run the (all of REmnux) RMNUX as a container
+docker container: docker run --rm -it -u remnux remnux/remnux-distro bash
+
+docker run -rm -it -u remnux -v /home/remnux/files remnux/ermnux-distro bash
+"""  (-v will run the remnux docker with access to computers
+DIRECTORY)"""
+
+
+#yara-rules sample.exe   (dont need to add .yara signatures)
+#clamscan sample.exe     (bumps this exe with clam signature DB| #freshclam to update signatures)
+#signsrch sample.exe     (looks for signatures for cryptographic data/ encode and decode data)
+
+
+#peframe sample.exe (gives info about PE)
+#pecheck sample.exe (more verbose info about PE)(high degree of entropy= most likely packed)will show overlay
+--overlay! is data addes to file after the file has been already created- mot likely malicious
+#pecheck -g o -D sample.exe > sample.exe.overlay  (to extrsact the overlay)
+ then #strings samole.exe.overlay
+#pestr sample.exe | more   (extracts strings)
+
+
+STATIC TOOLS TO DEOBFUSCATE
+
+#xorsearch sample.exe http
+#brxor.py sample.exe   (decodes and auto decodes with showing key)
+#Floss sample.exe    (floss emulates execution of program and shows more than 1 byte long xor after emultaor execution)
+
+(emulate execution of malware to see api calls-intercept api calls when emulates the execution)
+#binee sample.exe
+(has windows emulator installed on remnux)
+(heavy tools that uou can run on remnux with docker)
+#docker run -it 0rm 0v ~/:/tmp/files remnux/retdec bash
+  #cd /tmp/files
+  #retdec-decompiler.py sample.exe   (decompiles and generates sample.exe.c file)
+
+  #exit  (to exit container)
+
+#capa -vv sample.exe   (emulate execution of malware)
+
+#ghidra
+  look at file offset shown in capa hex offset
+
+switch host only nw adapter----------
+
+renew-dhcp
+windows on same nw and windows is config to use remnux as DG and DNS
+
+#fakedns  (fake remnux as the dns server)
+#wireshark &
+#inetsim
+
+-now infect windows with sample.exe - windows running process hacker
