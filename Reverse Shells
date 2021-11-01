@@ -1,5 +1,14 @@
-
-
+LINE
+13              Reverse Shell           [PAYLOAD OF ALL THINGS]
+52              Reverse Shells vs Bind Shells
+74              Netcat Shell Stabilisation
+137             SOCAT
+198             SOCAT Encrypted Shell
+238             Common Shell Payloads   [PayloadsAllTheThings]
+270             MSFVENOM
+357             MetaSploit Multi/Handler
+389             Webshells
+425             Some POST exploit things to do 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 Reverse Shell    PAYLOAD OF ALL THINGS https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
