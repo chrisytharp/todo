@@ -6,3 +6,5 @@ Each of the tools falls into one of the following categories:
       Security Utilities
       System Information
       Miscellaneous
+Process Monitor is a real-time troubleshooting tool. ... Process Explorer is considered to be a more advanced form of the Windows Task Manager. 
+Using it you can find out what files, DLLs, and registry keys particular processes have open and the CPU and memory usage of each
