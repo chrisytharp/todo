@@ -1,0 +1,50 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOOLS:  Sigcheck  Streams   Sdelete
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Sigcheck  
+    Cmdline utility that shows File version, Timestamp info, & digital sig details (including certificate chains)
+    It also includes an option to check a file’s status on VirusTotal and an option to upload a file for scanning
+
+    NOTE: The location of all (Core Windows) executables are in C:\Windows\System32, except for Explorer.exe (which is C:\Windows)
+    
+    Ex. Check for unsigned files in C:\Windows\System32  ->   "sigcheck -u -e C:\Windows\System32 -accepteula"
+          
+          -u "If VirusTotal check is enabled, show files that are unknown by VirusTotal or have non-zero detection, otherwise show only unsigned files."
+          -e "Scan executable images only (regardless of their extension)"
+------------------------------------------------------------------------------------------------------------------------------------------------------------------          
+Streams
+    NTFS file sys provides apps the ability to create ADS (alternate data streams) of info. By default, all data is stored in a file's main unnamed data stream, 
+    but by using the syntax 'file:stream', you are able to read and write to alternates" 
+
+    ADS is a file attribute specific to Windows NTFS. Every file has at least one data stream ($DATA) and ADS allows files to contain more than one stream of 
+    data. Natively, Window Explorer doesn't display ADS to the user. There are 3rd party executables that can be used to view this data, but Powershell gives 
+    you the ability to view ADS for files.
+
+    Ex. file downloaded from the Internet   ->   "streams C:\Users\Me\Downloads\file.zip -accepteula"
+          
+          -s "Recursive subdirectories"         IF RESULTS: ":Zone.Identifier:$DATA     185"   <-- INVESTIGATE !!! 
+          -d "Delete Streams"
+------------------------------------------------------------------------------------------------------------------------------------------------------------------          
+SDelete
+    CmdLine utility that takes a number of options. It allows you to delete one or more files and/or directories, or cleanse the free space on a logical disk
+    (Secure Delete) implements DOD 5220.22-M (Department of Defense clearing and sanitizing protocol).
+          1st PASS: Writes a zero & verifies the write
+          2nd PASS: Writes a one & verifies the write
+          3rd PASS: Writes a random char & verifies the write
+    NOTE: SDelete has been used by adversaries & is MITRE techniques T1485 (Data Destruction) & T1070 (Indicator Removal on Host: File Deletion)
+
+    USAGE:  sdelete [OPTIONS] <file or directory>
+          
+          -c	Clean free space. Specify an option amount of space to leave free for use by a running system
+          -p	Specifies number of overwrite passes (default 1)
+          -r	Remove Read-Only attribute
+          -s	Recurse subdirectories
+          -z	Zero free space (good for virtual disk optimization)
+          -nobanner	Do not display the startup banner and copyright message.
+          
+
+
+
+
+
+
