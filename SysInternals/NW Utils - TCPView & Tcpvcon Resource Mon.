@@ -18,3 +18,9 @@ TCPView
           "tcpview -accepteula"   <- in CMD-Line
   
   In "Options Menu" unselected "Show Unconnected Endpoints" The output will only displays processes w/ an established outbound connection
+
+
+
+
+
+
