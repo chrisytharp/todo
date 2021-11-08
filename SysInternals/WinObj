@@ -1,0 +1,55 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+WinObj
+------
+is a 32-bit Windows NT program that uses the native Windows NT API (provided by NTDLL.DLL) to access and display information on the NT Object Manager's name space." 
+
+Remember that Session 0 is the OS session and Session 1 is the User session.  Also recall that there will be at least 2 csrss.exe processes running, one for each session. 
+Note Session 1 will be for the first user logged into the system.  
+
+Launch WinObj.
+The below image shows the default view for WinObj.
+Within Session 0, under DosDevices, there is an entry for the network drive I mounted in my local machine.
+Let's look at WindowStations value for Session 1. 
+Let's compare this information with Process Explorer. The below image is for csrss.exe, which was launched along with winlogon.exe by smss.exe. 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BgInfo
+------
+"It automatically displays relevant information about a Windows computer on the desktop's background, such as the computer name, IP address, service pack version, and more." (official definition)
+
+This is a handy utility if you manage multiple machines. This tool, or similar tools, are typically utilized on servers. When a user RDPs into a server, the system information is displayed on the wallpaper to provide quick information about the server, such as the server's name. 
+
+Refer to the Sysinternals BgInfo page for more information on installation and usage. 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+RegJump
+-------
+"This little command-line applet takes a registry path and makes Regedit open to that path. It accepts root keys in standard (e.g. HKEY_LOCAL_MACHINE) and abbreviated form (e.g. HKLM)." (official definition)
+
+When navigating through the registry using the Registry Editor, one must manually drill down to the key you wish to inspect.
+
+There are multiple ways to query the Windows Registry without using the Registry Editor, such as via the command line (reg query) and PowerShell (Get-Item/Get-ItemProperty).
+
+Using Regjump will open the Registry Editor and automatically open the editor directly at the path, so one doesn't need to navigate it manually.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Strings
+-------
+"Strings just scans the file you pass it for UNICODE (or ASCII) strings of a default length of 3 or more UNICODE (or ASCII) characters. Note that it works under Windows 95 as well." (official definition)
+
+This is the tool that was used on Day 21 of AoC2 to inspect a mysterious binary. 
+
+The example below strings is used to search within the ZoomIt binary for any string containing the word 'zoom'. 
+
+Other tools fall under the Miscellaneous category. I encourage you to explore these tools at your own leisure.
+
+
+
+
+
+
+
+
+
+
+
+
