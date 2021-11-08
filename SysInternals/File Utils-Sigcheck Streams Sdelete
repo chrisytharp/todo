@@ -22,7 +22,8 @@ Streams
           -s "Recursive subdirectories"         IF RESULTS: ":Zone.Identifier:$DATA     185"   <-- INVESTIGATE !!! 
           -d "Delete Streams"
      
-    VIEW ADS= "notepad.exe file.txt:ADS.txt"
+    VIEW ADS= Powershell "get-item -path file.txt -stream *"  
+                         "get-content -path file.txt -stream ads.txt"        <-- "ads.txt" is the result found in previous command
           
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------          
 SDelete
