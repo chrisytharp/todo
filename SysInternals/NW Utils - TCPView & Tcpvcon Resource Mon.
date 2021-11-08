@@ -7,4 +7,14 @@ Windows program that will show you a detailed listings of ALL TCP & UDP endpoint
 
   TCPView provides a more informative than "Netstat". TCPView also includes Tcpvcon, a CMD-Line version of TCPView
 
-This is a good time to mention that Windows has a built-in utility that provides the same functionality. This tool is called Resource Monitor. There are many ways to open this tool. From the command line use resmon. 
+  Windows has a built-in utility that provides the same functionality. This tool is called "Resource Monitor"
+  
+  Type "resmon" in CMD-Line to open utility
+  
+      Expand "TCP Connections" to see the Remote Address for each Process w/ an outbound connection.
+
+TCPView      
+------- 
+          "tcpview -accepteula"   <- in CMD-Line
+  
+  In "Options Menu" unselected "Show Unconnected Endpoints" The output will only displays processes w/ an established outbound connection
