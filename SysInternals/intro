@@ -1,0 +1,5 @@
+Real-world scenario: As a security engineer troubleshoot why an agent wasn't responding on an endpoint—the tools used were ProcExp, ProcMon, & ProcDump.
+
+      ProcExp = to inspect the agent process, its properties, and associated threads and handles.
+      ProcMon = to investigate if there were any indicators on why the agent was not operating as it should.
+      ProcDump = to create a dump of the agent process to send to the vendor for further analysis.
