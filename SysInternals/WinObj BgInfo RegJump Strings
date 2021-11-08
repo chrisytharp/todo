@@ -14,33 +14,29 @@ Let's compare this information with Process Explorer. The below image is for csr
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 BgInfo
 ------
-"It automatically displays relevant information about a Windows computer on the desktop's background, such as the computer name, IP address, service pack version, and more." (official definition)
-
-This is a handy utility if you manage multiple machines. This tool, or similar tools, are typically utilized on servers. When a user RDPs into a server, the system information is displayed on the wallpaper to provide quick information about the server, such as the server's name. 
-
-Refer to the Sysinternals BgInfo page for more information on installation and usage. 
+Automatically displays relevant information about a Windows computer on the desktop's background(computer name, IP address, service pack version, and more)
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 RegJump
 -------
-"This little command-line applet takes a registry path and makes Regedit open to that path. It accepts root keys in standard (e.g. HKEY_LOCAL_MACHINE) and abbreviated form (e.g. HKLM)." (official definition)
+CMD-Line applet takes a registry path and makes Regedit open to that path. It accepts root keys in standard (e.g. HKEY_LOCAL_MACHINE) and abbreviated form (e.g. HKLM).
 
 When navigating through the registry using the Registry Editor, one must manually drill down to the key you wish to inspect.
 
-There are multiple ways to query the Windows Registry without using the Registry Editor, such as via the command line (reg query) and PowerShell (Get-Item/Get-ItemProperty).
+There are multiple ways to query the Registry w/out using the Registry Editor, such as via the command line "reg query" & PowerShell "Get-Item/Get-ItemProperty"
 
 Using Regjump will open the Registry Editor and automatically open the editor directly at the path, so one doesn't need to navigate it manually.
+
+  "regjump HKLM\System|CurrentControlSet\Services\WebClient -accepteula"
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Strings
 -------
-"Strings just scans the file you pass it for UNICODE (or ASCII) strings of a default length of 3 or more UNICODE (or ASCII) characters. Note that it works under Windows 95 as well." (official definition)
+Strings just scans the file you pass it for UNICODE (or ASCII) strings with a default length of 3 or more UNICODE (or ASCII) characters
 
-This is the tool that was used on Day 21 of AoC2 to inspect a mysterious binary. 
+Example strings search within the ZoomIt binary for any string containing the word 'zoom'
 
-The example below strings is used to search within the ZoomIt binary for any string containing the word 'zoom'. 
-
-Other tools fall under the Miscellaneous category. I encourage you to explore these tools at your own leisure.
+  "strings ZoomIt.exe | findstr /i zoom*"   <-- POWERSHELL
 
 
 
