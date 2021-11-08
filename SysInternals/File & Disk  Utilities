@@ -24,6 +24,9 @@ Streams
           
           -s "Recursive subdirectories"         IF RESULTS: ":Zone.Identifier:$DATA     185"   <-- INVESTIGATE !!! 
           -d "Delete Streams"
+     
+    VIEW ADS= "notepad.exe file.txt:ADS.txt"
+          
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------          
 SDelete
     CmdLine utility that takes a number of options. It allows you to delete one or more files and/or directories, or cleanse the free space on a logical disk
