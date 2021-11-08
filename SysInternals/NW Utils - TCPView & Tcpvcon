@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TCPView: 
+
+Windows program that will show you a detailed listings of ALL TCP & UDP endpoints on your system, including local & remote addresses & the state of TCP connections
+  
+  NOTE:Windows Server 2008, Vista, & XP, TCPView also reports the name of the process that owns the endpoint
+
+  TCPView provides a more informative than "Netstat". TCPView also includes Tcpvcon, a CMD-Line version of TCPView
+
+This is a good time to mention that Windows has a built-in utility that provides the same functionality. This tool is called Resource Monitor. There are many ways to open this tool. From the command line use resmon. 
