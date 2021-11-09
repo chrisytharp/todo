@@ -9,3 +9,6 @@ Let's get more information on the command "qe" (query-events) with:
   "wevtutil.exe qe /?"
 
 
+
+https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/wevtutil
+
