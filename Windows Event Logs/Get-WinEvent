@@ -60,6 +60,8 @@ Get-WinEvent -FilterHashtable @{LogName='Microsoft-Windows-PowerShell/Operationa
              
              
              
+https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/Get-WinEvent?view=powershell-7.1             
+             
              
              
              
