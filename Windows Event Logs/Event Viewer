@@ -47,4 +47,10 @@ Actions pane (far right pane)
 To view event logs from another computer
     right-click on Event Viewer (Local) > Connect to Another Computer...
 
-
+View WINODWs POWERSHELL Logging
+    EventViewer -> Application & Services Logs -> Windows Powershell
+    
+    
+    
+    
+    
