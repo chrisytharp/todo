@@ -1,31 +1,11 @@
-Ok, you played around with Event Viewer. Imagine you have to sit there and manually sift through hundreds or even thousands of events (even after filtering the log). Not fun. It would be nice if you could write scripts to do this work for you. We will explore some tools that will allow you to query event logs via the command line and/or PowerShell.
+wevtutil.exe tool enables you to retrieve information about event logs and publishers. Can also use this cmd to install & uninstall event manifests, 
+              to run queries, and to export, archive, and clear logs."
 
-Let's look at wevtutil.exe first. Per Microsoft, the wevtutil.exe tool "enables you to retrieve information about event logs and publishers. You can also use this command to install and uninstall event manifests, to run queries, and to export, archive, and clear logs."
+ "wevtutil.exe /?"          <- Access help 
+ "wevtutil.exe [COMMAND] /?"    <- Will provide additional information specific to a command
 
-As with any tool, access its help files to find out how to run the tool. An example of a command to do this is wevtutil.exe /?. 
+Let's get more information on the command "qe" (query-events) with:
 
-
-
-From the above screenshot, under Usage, you are provided a brief example of how to use the tool.
-
-In this example, ep (enum-publishers) is used. This is a command for wevtutil.exe.
-
-The other commands are...
+  "wevtutil.exe qe /?"
 
 
-
-Lastly, within the help information for wevtutil.exe are Common options. 
-
-
-
-Notice at the bottom of the above snapshot, wevtutil COMMAND /?. This will provide additional information specific to a command.
-
-Let's get more information on the command qe (query-events). 
-
-
-
-Look over the information within the help menu to fully understand how to use this command.
-
-Ok, great! You have enough information to use this tool—time to answer some questions. It is always recommended to look into the tool and its related information at your own leisure. 
-
-Note: You can get more information about using this tool further but visiting the online help documentation docs.microsoft.com. 
