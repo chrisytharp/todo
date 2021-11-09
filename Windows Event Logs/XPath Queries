@@ -39,7 +39,7 @@ Building a query for TargetUserName (we will be in SYSTEM in the xml view)
 Note: The -MaxEvents parameter was used, and it was set to 1. This will return just 1 event. 
 
 
-
+https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ms256115(v=vs.100)
 
 
 
