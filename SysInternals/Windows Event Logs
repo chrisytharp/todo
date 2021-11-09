@@ -20,6 +20,8 @@ Standard logs are visible under Windows Logs
       CustomLog	    Contains events logged by applications that create a custom log. Using a custom log enables an application to control the size of the log or attach ACLs for security purposes without affecting other applications.
 
 Applications and Services Logs. Expand this section and drill down on Microsoft > Windows > PowerShell > Operational
-Within Properties, you see the log location, log size, and when it was created, modified, and last accessed. Within the Properties window, you can also see the maximum set log size and what action to take once the criteria are met. This concept is known as log rotation. These are discussions held with corporations of various sizes. How long to keep logs and when it's permissible to overwrite the logs with new data.
+      Within Properties, you see the log location, log size, and when it was created, modified, and last accessed. Within the Properties window, you can also see the maximum set log size and what action to take once the criteria are met. 
+      This concept is known as log rotation. How long to keep logs and when it's permissible to overwrite the logs with new data.
 
-Lastly, notice the Clear Log button at the bottom right. There are legitimate reasons to use this button, but adversaries will likely attempt to clear the logs to go undetected.  Note: This is not the only method to clear the event logs for any given event provider.
+NOTE: the "CLEAR LOG" button at the bottom right. ATTACKERS will likely attempt to clear the logs to go undetected.  
+        Note: This is not the only method to clear the event logs for any given event provider.
