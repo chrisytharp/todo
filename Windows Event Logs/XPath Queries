@@ -1,1 +1,45 @@
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 XPath (or XML Path Language) Windows Event Log supports a subset of XPath 1.0
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+!!! You can use XPATH Queries within wevtutil.exe or Get-WinEvent TOOLS !!!
+
+XPath event query starts with '*' or 'Event'
+Within a Log in EventViewer:
+      Click on the Details tab and select the XML View radio button. View how to use the XML View to construct a valid XPath query
+
+1st tag is the starting point (either '*' or the word 'Event') CMD will look like: 
+    
+    Get-WinEvent -LogName Application -FilterXPath '*'
+
+next tag is System, add this and CMD looks like:
+    
+    Get-WinEvent -LogName Application -FilterXPath '*/System/'
+
+Note: Best practice to explicitly use keyword 'System' but you can use an * instead as with the Event keyword. (-FilterXPath '*/*') is still valid. 
+
+If the Event ID is 100. Let's add that into the CMD
+
+    Get-WinEvent -LogName Application -FilterXPath '*/System/EventID=100'
+
+If you want to query on a different element, i.e. Provider Name, the syntax will be different. To filter on the provider, we need to use the Name attribute of Provider. 
+
+    Get-WinEvent -LogName Application -FilterXPath '*/System/Provider[@Name="WLMS"]'
+  
+If we only want to query for events with Event ID 101. 
+
+    Get-WinEvent -LogName Application -FilterXPath '*/System/EventID=101 and */System/Provider[@Name="WLMS"]'  
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+To create XPath queries for elements within EventData Note: The EventData element doesn't always contain information.
+
+Building a query for TargetUserName (we will be in SYSTEM in the xml view) 
+
+    Get-WinEvent -LogName Security -FilterXPath '*/EventData/Data[@Name="TargetUserName"]="System"' -MaxEvents 1
+
+Note: The -MaxEvents parameter was used, and it was set to 1. This will return just 1 event. 
+
+
+
+
+
+
