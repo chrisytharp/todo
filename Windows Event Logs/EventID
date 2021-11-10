@@ -1,6 +1,21 @@
 https://static1.squarespace.com/static/552092d5e4b0661088167e5c/t/580595db9f745688bc7477f6/1476761074992/Windows+Logging+Cheat+Sheet_ver_Oct_2016.pdf
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Note: enabled/configured PowerShell logging on the endpoint. This can be enabled via Group Policy or the Registry.
 
-Another feature to enable/configure is Audit Process Creation, which will generate event ID 4688. This will enable command-line process auditing. This setting is NOT enabled in the virtual machine but feel free to enable it and observe the events generated after executing some commands.
+        Local Computer Policy > Computer Configuration > Administrative Templates > Windows Components > Windows PowerShell
 
-Local Computer Policy > Computer Configuration > Administrative Templates > System > Audit Process Creation
+Note: enable/configure Audit Process Creation, which will generate event ID 4688. This will enable command-line process auditing. 
+
+        Local Computer Policy > Computer Configuration > Administrative Templates > System > Audit Process Creation
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+huntung saved log on Deskop "sus.evtx"
+
+search for cleared logs = (Format-List "fl" -property *) to see all properties of log
+-------------------------------------------------------------------------------------
+Get-WinEvent -Path sus.evtx -FilterXPath '*/System/EventID=104' | fl -property*
+
+powershell group enumeration = EvenID 4799
+
+
 
