@@ -1,0 +1,6 @@
+https://static1.squarespace.com/static/552092d5e4b0661088167e5c/t/580595db9f745688bc7477f6/1476761074992/Windows+Logging+Cheat+Sheet_ver_Oct_2016.pdf
+
+Another feature to enable/configure is Audit Process Creation, which will generate event ID 4688. This will enable command-line process auditing. This setting is NOT enabled in the virtual machine but feel free to enable it and observe the events generated after executing some commands.
+
+Local Computer Policy > Computer Configuration > Administrative Templates > System > Audit Process Creation
+
