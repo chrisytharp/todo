@@ -1,0 +1,52 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Installing Sysmon
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+You can also download all of the Sysinternals tools w/ a PowerShell command OR grab the single binary. It is also recommended to use a Sysmon config file along with Sysmon to 
+get more detailed & higher-quality event tracing.
+
+sysmon-config files from SwiftOnSecurity GitHub are good: https://github.com/SwiftOnSecurity/sysmon-config
+
+You can find the Sysmon binary from the Microsoft Sysinternals website OR use powershell CMD:
+
+        "Download-SysInternalsTools C:\Sysinternals"
+
+To fully utilize Sysmon you will also need to download a Sysmon config or create your own config. We suggest downloading the SwiftOnSecurity sysmon-config. A Sysmon config will 
+allow for further granular control over the logs as well as more detailed event tracing. 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Starting Sysmon
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+To start Sysmon you will want to open a new PowerShell or Command Prompt as an Administrator. Then, run the below command it will execute the Sysmon binary, accept the end-user 
+license agreement, and use SwiftOnSecurity config file. 
+
+Command Used: Sysmon.exe -accepteula -i sysmonconfig-export.xml
+
+
+
+Now that Sysmon is started with the configuration file we want to use, we can look at the Event Viewer to monitor events. The event log is located under Applications and 
+Services Logs/Microsoft/Windows/Sysmon/Operational
+
+Note: At any time you can change the configuration file used by uninstalling or updating the current configuration and replacing it with a new configuration file. For more 
+information look through the Sysmon help menu. 
+
+If installed correctly your event log should look similar to the following:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+For this room, we have already created an environment with Sysmon and configuration files for you. Deploy and use this machine for the remainder of this room. 
