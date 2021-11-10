@@ -1,4 +1,6 @@
 https://static1.squarespace.com/static/552092d5e4b0661088167e5c/t/580595db9f745688bc7477f6/1476761074992/Windows+Logging+Cheat+Sheet_ver_Oct_2016.pdf
+https://devblogs.microsoft.com/powershell/powershell-the-blue-team/
+https://blog.palantir.com/tampering-with-windows-event-tracing-background-offense-and-defense-4be7ac62ac63
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 Note: enabled/configured PowerShell logging on the endpoint. This can be enabled via Group Policy or the Registry.
 
