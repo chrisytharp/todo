@@ -1,4 +1,10 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 Sysmon is similar to Windows Event Logs with further detail and granular control
+Events within Sysmon are stored in:
+    "Applications and Services" Logs/Microsoft/Windows/Sysmon/Operational
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Sysmon Config Overview
 
+Sysmon requires a config file in order to tell the binary how to analyze the events that it is receiving. You can create your own Sysmon config or you can download a config. Here is an example of a high-quality config that works well for identifying anomalies created by SwiftOnSecurity: Sysmon-Config. Sysmon includes 24 different types of Event IDs, all of which can be used within the config to specify how the events should be handled and analyzed. Below we will go over a few of the most important Event IDs and show examples of how they are used within config files.
+
+When creating or modifying configuration files you will notice that a majority of rules in sysmon-config will exclude events rather than include events. This will help filter out normal activity in your environment that will in turn decrease the number of events and alerts you will have to manually audit or search through in a SIEM. On the other hand, there are rulesets like the ION-Storm sysmon-config fork that takes a more proactive approach with it's ruleset by using a lot of include rules. You may have to modify configuration files to find what approach you prefer. Configuration preferences will vary depending on what SOC team so prepare to be flexible when monitoring. prepare to be flexible when monitoring.
