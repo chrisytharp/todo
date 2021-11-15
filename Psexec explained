@@ -4,3 +4,10 @@ SYSTEM account is the highest privilege level in the Windows user model. It exis
 https://www.lifewire.com/psexec-4587631
 
 psexec "-s" -s	Runs the remote process in the System account.
+
+SysInternals first released PsExec more than a decade ago, and it has provided administrators a reliable method for remotely accessing systems via the Server Message Block (SMB) protocol ever since. The fundamental behavior of PsExec follows a simple pattern:
+
+Establishes an SMB network connection to a target system using administrator credentials
+Pushes a copy of a receiver process named PSEXESVC.EXE to the target system’s ADMIN$ share
+Launches PSEXESVC.EXE, which sends input and output to a named pipe
+In general, a named pipe is a method of interprocess communication, and various specific pipes are common in Windows Active Directory domains. Pipes may be named for specific uses, and, in this case, a pipe for PsExec communication usually looks like this: \\.\pipe\psexesvc.
