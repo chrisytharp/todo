@@ -1,0 +1,6 @@
+can run w system account the SYSTEM account exists in every Windows installation, has no password set, and in most cases has Full Control permissions on local NTFS file systems, it would be a security issue, if this account could be used to authenticate to network resources and access files
+SYSTEM account is the highest privilege level in the Windows user model. It exists to provide ownership to objects that are created before a normal user logs on, such as the Local Security Authority Subsystem (LSASS) and the Session Management Subsystem (SMSS)
+
+https://www.lifewire.com/psexec-4587631
+
+psexec "-s" -s	Runs the remote process in the System account.
