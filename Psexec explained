@@ -11,3 +11,6 @@ Establishes an SMB network connection to a target system using administrator cre
 Pushes a copy of a receiver process named PSEXESVC.EXE to the target system’s ADMIN$ share
 Launches PSEXESVC.EXE, which sends input and output to a named pipe
 In general, a named pipe is a method of interprocess communication, and various specific pipes are common in Windows Active Directory domains. Pipes may be named for specific uses, and, in this case, a pipe for PsExec communication usually looks like this: \\.\pipe\psexesvc.
+
+In addition to the metadata, a Windows Registry artifact (such as HKEY_CURRENT_USER\software\sysinternals\psexec\eulaaccepted) can indicate when PsExec has been used. Additionally, an admin must accept an End-User License Agreement if they want to use the utility, and the acceptance is written to this key. As with binary metadata and named pipe usage, this will not change if PsExec is renamed, but it can be easily removed by an informed adversary.
+
