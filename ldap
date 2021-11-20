@@ -1,0 +1,2 @@
+LDAP Ports
+The standard TCP ports for LDAP are 389 for unencrypted communication and 636 for LDAP over a TLS-encrypted channel.
