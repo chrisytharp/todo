@@ -1,1 +1,44 @@
 Modbus is a communication protocol used to control electronic devices in the industrial sector. Its use is widespread owing to the fact it is easy to develop and maintain. It is also royalty free. This lab introduces Modbus and provides an insight into its functions and data structure.
+Protocols – Modbus
+Quick Summary
+Modbus is a communication protocol used to control electronic devices in the industrial sector. Its use is widespread owing to the fact it is easy to develop and maintain. It is also royalty free. This lab introduces Modbus and provides an insight into its functions and data structure.
+
+About
+Originally developed by Modicon in 1979, Modbus has been managed by The Modbus Organisation since 2004. It is used to facilitate the communication of different devices connected to a network, specifically in industrial applications. For example, Modbus can be used in a production line to transmit data from a range of sensors to a monitoring system.
+
+In a Modbus network, the client requesting information is referred to as the leader, while the server providing the information is called the follower. There can be as many as 247 follower devices for each leader, with each follower assigned their own unique address.
+
+A single-bit physical output is called a coil.
+
+Data types
+The data types used by Modbus can be summarised into the following four categories:
+
+Coil (1-bit read/write)
+Discrete input (1-bit read only)
+Holding register (16-bit read/write)
+Input register (16-bit read only)
+Versions
+There are several different versions of Modbus, some of which offer additional functionality, like support for historical data. However, the main difference between these versions depends on whether information is sent using a serial connection or TCP/IP.
+
+Functions
+The following list provides a summary of Modbus’ commonly used function codes:
+
+01 – Read Coils 
+02 – Read Discrete Inputs 
+03 – Read Multiple Holding Registers 
+04 – Read Input Registers 
+05 – Write Single Coil 
+06 – Write Single Holding Register 
+15 – Write Multiple Coils 
+16 – Write Multiple Holding Registers 
+43 – Read Device Identification
+
+Reading coils
+When reading coils, a request is sent by the leader with the address of the first coil, followed by the number of coils to read. This allows users to read multiple values using a single request.
+
+The response sent by the follower contains the number of bytes followed by the values of each coil, encoded as a hexadecimal value. For example, if six coils with the values ‘off, on, on, off, off, off,’ are requested, this will be returned as the hex value ‘06’. It is important to note that while the bits making up a data byte are typically shown with the most significant bit (MSB) on the left and least significant bit (LSB) on the right. However, the bits are transmitted serially, so the LSB appears first and MSB last. If the number of bits transmitted is not divisible by eight, the last byte is padded with zeros to form a byte of valid length.
+
+content::panels::imageonly-9223-040321-attachment.png
+content::panels::imageonly-9224-040321-attachment.png
+In this lab
+In this lab you will need to review a packet capture containing information sent between a Modbus client and a server. Using this information, you will need to answer a series of questions.
