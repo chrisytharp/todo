@@ -1,0 +1,9 @@
+Certutil deals with official system certificates; it is a Windows utility program used to dump and display certification authority (CA) configuration information. It has many functions and capabilities, such as providing checksums, encoding files and even retrieving files from the Internet
+
+Using CertUtil
+CertUtil can act as the vehicle for downloading and decoding a payload. To demonstrate how malware often utilises CertUtil, in this lab you will be using the -encode and -decode options. Encode will encode a specified file to base64, while decode will reverse this function. To view the encoded file in its Base64 format, simply open it in a text editor such as Notepad.
+
+certutil.exe [Options] [InFile] [OutFile]
+
+Malware
+Malicious actors can use CertUtil to communicate with their C2 servers to download payloads that are disguised as certificate files.
