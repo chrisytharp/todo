@@ -1,0 +1,41 @@
+Protocols – SMTP
+Quick Summary
+Simple Mail Transfer Protocol (SMTP) is the internet standard for transmitting emails. In this lab, we will cover the structure of an SMTP message and the exchange that takes place between the client and server.
+
+The current version of SMTP is defined in RFC 5321. This outlines the features and requirements which must be met for an application to be compliant with SMTP.
+
+SMTP can be split into two main parts: the envelope and the content.
+
+Envelope
+
+This section contains the SMTP commands. These detail where the email came from and where it is going. This information is used by email transport software to route and deliver messages. Optional protocol extensions may also be found in this section.
+
+Content
+
+This section can be thought of like a traditional letter. It contains all the information that the end user is concerned with, including the date, the sender’s email address, the subject and the main body of text.
+
+It is important to note that although the sender’s email address will appear in both the envelope and the content of the email, the email address shown in the content is the one which is seen by the user. The email address in the envelope is only used for the transportation of the message between different machines.
+
+How SMTP works?
+
+The process begins with the client connecting to the server, which then responds with an opening message. Assuming there are no problems, the server responds with a code 220 to signify that everything is okay.
+
+At this point the client sends a HELO or EHLO, identifying itself to the server, followed by the MAIL FROM and RCPT TO headers from the envelope. After each message, the server responds with a code confirming the information has been received and that it is okay to continue.
+
+Next, the client sends a DATA message to the server indicating that it is ready to begin sending the content of the message. The server responds with a code 354 signalling to the client that it should begin transmission of the content.
+
+Once the client has finished sending the main content of the email it must send a <CR><LF>.<CR><LF> (carriage return, line feed) to the server so that it knows it has reached the end of the message. Finally, the server confirms the message is queued for delivery before the connection is closed.
+
+Response Codes
+
+As with many network protocols, a range of response codes exist to allow the server to convey important information back to the client. A summary of the most notable response codes can be found below: 
+
+220 <domain> Service ready
+221 <domain> Service closing transmission channel
+250 Requested mail action okay/completed
+354 Start mail input; end with <CRLF>.<CRLF>
+450 Requested mail action not taken: mailbox unavailable (e.g.,mailbox busy or temporarily blocked for policy reasons)
+550 Requested action not taken: mailbox unavailable (e.g., mailbox not found, no access, or command rejected for policy reasons)
+Sending attachments with MIME
+
+Multipurpose Internet Mail Extension (MIME) is an internet standard which enables emails to have message bodies with multiple parts and allows users to add attachments, such as videos and images. When using MIME, the version number, content type and description appear as headers. Another important aspect of MIME is the boundary, which is used to segment the data into different sections. This enables applications to differentiate between normal text and encoded data, such as in a Base64 encoded image
