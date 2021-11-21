@@ -1,0 +1,61 @@
+Manipulating text
+You know how to edit files in text editors using the command line, but these editors aren’t the most efficient way to make multiple edits at once. For that, the tools tr and sed are incredibly useful.
+
+Translate (tr)
+You can use the tr command to manipulate text without needing to make multiple changes manually – think of the find and replace feature in a Word document. tr takes input and replaces all instances of a specific string with another, with the command tr [original_string] [string_to_replace]. For example, the command tr [a] [b] would replace every letter a with the letter b.
+
+If you entered the command tr [a] [b] in your terminal, it would look like nothing is happening. This is because tr waits for input from the terminal to perform its replacement by default. If we wanted to make tr act on a file, we would need to use redirection operators: the less than (<) and greater than (>) characters.
+
+By adding < file to our original tr [a] [b] command, tr would perform any replacement on the file's content rather than wait for input from the command line. You can also add > filename to the command if you’d rather the output be saved directly to a file than output the results to the terminal.
+
+If we put all that together, the command tr [a] [b] < myfile.txt > newfile.txt would:
+
+Take the contents of the file myfile.txt
+Replace every letter a with a letter b
+Save the results to a file called ‘newfile.txt’. If this file exists, overwrite it.
+What makes tr even more powerful is the ability to specify character sets. This allows you to specify specific types of characters rather than having to specify each character.
+
+For example, you may have a file in which you need to convert every lowercase character into uppercase. 
+
+Instead of writing tr [abcd...xyz] [ABCD...XYZ], you can use the sets [:lower:] and [:upper:] in the command: tr [:lower:] [:upper:] < lowercase.
+
+Here are some other useful character groupings which tr is aware of:
+
+[:alnum:] All letters and digits (A–Z, a–z, 0–9)
+[:alpha:] All letters (A–Z, a–z)
+[:digit:] All digits (0–9)
+[:punct:] All punctuation characters
+
+You can also use tr to remove character sets from a file. Use the command tr -d [:chars:] to remove a character set. 
+
+Stream Editor (sed)
+The sed command is commonly used to search and replace specific string patterns from text. Unlike tr, sed can search and replace for more specific strings rather than simply converting all instances of a character in the text.
+
+A typical sed command is constructed like this:
+
+sed ‘s/pattern_to_find/pattern_to_replace/g’ filewitherror.txt
+
+Broken down, this command:
+
+Opens the file called ‘filewitherror.txt’
+Looks for the string 'pattern_to_find' in the text file. If it finds any;
+Replaces the string ‘pattern_to_find’ with the string “pattern_to_replace”
+Prints the results to the string
+If, for example, you wanted to capitalise all instances of a name (e.g., Alice) in a file, sed would be advantageous over tr. tr could replace all lowercase a characters with their uppercase equivalent, but this would also convert characters you don’t want to convert. The command sed s/alice/Alice/g file.txt > newfile.txt would instead be used.
+ 
+
+In this lab
+This lab will familiarise you with the commands mentioned above and provide you with the opportunity to practise commands that may be required in the wild while working on Linux to manipulate files.
+
+Note
+Making unexpected changes such as modifying, moving or deleting the files or folders will prevent the correct token from being generated. Please do not make any changes inside the folder other than what has been asked by the question at each lab stage.
+
+Commands overview
+tr [original] [replacewith] < filename > newfile– replace all instances of the original character set with the character set specified. The > newfile part of the command is optional but allows you to use tr on files rather than input from the terminal.
+
+sed ‘s/[original]/[replacewith]/g’ filename – search for all instances of the original string in the file and replace it with the specified string. 
+
+tr [original] [replacewith] < filename – allows you to run the tr command on files rather than waiting for input from the terminal. 
+
+tr [original] [replacewith] > filename – allows you to save command output to files rather than outputting it to the terminal. 
+Both the < and > parameters are optional, but they can be used on most Linux commands we’ve learned in the series so far.
