@@ -20,7 +20,7 @@ The command to search for partial matches looks like this:
 An example using the find command in the Linux CLI with an emphasis on particular words
 Searching for a file with particular permissions
 The -perm flag is used with find to search for all files, a single file or directory with particular permissions. The command for this would look like the following:
-
+find / -user chris 
 find /[directory-to-search] -perm [permissions as numerical value]
 
 or as an example in the command line itself:
