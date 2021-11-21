@@ -1,0 +1,50 @@
+Quick Summary
+Systems with a large array of files and directories can be difficult to navigate at the best of times. Luckily, there’s a nifty tool in the CLI called find that lets you refine searches for optimal results. In this lab you’ll learn how the find command works and the filters and arguments associated with it. You'll then use this to find and identify specific information in the system.
+
+Finding treasures
+The find command is a useful tool that helps filter content within a file system based on certain filters. It supports a massive range of filters and parameters, allowing you to narrow down your search. Using the find command through the CLI is more powerful than a general search through the GUI; the command can search through everything, including different partitions in the operating system.
+
+It’s an incredibly handy tool for system administrators but can also be useful for general users to find that file you accidentally saved in an unknown location.
+
+All the ways you can 'find'
+There are many ways to use the find command. The most basic way to use it is to search for a file with a specific name:
+
+An image showing use the of find command in the Linux CLI
+You can easily search the current working directory for a file by using a period within the command instead of the directory path: find . -name [filename]. If you want to search all directories, not just the current working directory, you can use a forward slash (/) in the command instead of a period. This would appear as find / -name [filename].
+
+Searching for a partial match
+It’s possible to use find to search for files or directories that partially match what you’re looking for – great for when you don’t know its full name or want to see how many iterations of test.txt you’ve managed to create.
+
+The command to search for partial matches looks like this: 
+
+An example using the find command in the Linux CLI with an emphasis on particular words
+Searching for a file with particular permissions
+The -perm flag is used with find to search for all files, a single file or directory with particular permissions. The command for this would look like the following:
+
+find /[directory-to-search] -perm [permissions as numerical value]
+
+or as an example in the command line itself:
+
+An example using the find command in Linux CLI looking for anything with certain permissions
+Search for everything owned by a particular user
+Sometimes a system administrator might need to find all the things owned by a particular user. They can easily do this using:
+
+An example using the find command in the Linux CLI to find everything owned by a particular user. It says: linux@find-command:~$ find /[directory-to-search] -user
+This will list everything that's owned by that particular user in that directory. Don’t forget if you want to search through everything you can use the forward slash (/).
+
+And more!
+There’s much more that find can do; a treasure trove of information is at your fingertips.
+
+Search for a file that has a pattern (i.e. particular extensions)
+Find and delete
+Search for empty files and directories
+Search text within multiple files
+Search for a sting
+Search by size
+Commands overview
+find /[directory-to-search] -name filename –  Search a directory for a file
+find . -name [filename] –  Search the current directory for a file 
+find / -name [filename] –  Search all directories for a file
+ find /[directory-to-search] -name ‘[word]*’ – Search a directory for a filename that contains a word
+find /[directory-to-search] -perm [permissions as numerical value] –  Search a directory for everything that has particular user permissions
+find /[directory-to-search] -user –  Search a directory for everything owned by a particular use
