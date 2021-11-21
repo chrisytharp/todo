@@ -1,0 +1,67 @@
+Permissions
+Access to every file on Linux is controlled using file permissions. These permissions control who can perform certain actions on files on the Linux file system and are broken down into:
+
+Read;
+Write; and
+Execute
+For example, a user with read and execute permissions on a file would be able to read the file as well as execute it; however, this user would not be able to save any edits they make to the file, as they do not have write permissions.
+
+Reading permissions
+You may not have been aware, but you’ve already seen file permissions if you’ve completed the previous labs in this series. When running the command ‘ls -la’, you’re presented with a list of files in your current directory. One of the characteristics displayed in this list is the permissions of a file, displayed as a set of 10 characters:
+
+drwxr-xr-x 1 linux linux 4096 Jun 1 11:23
+drwxr-xr-x 1 root root 4096 May 10 2018
+
+Let's break it down:
+
+An image with the text drwxr-xr-x 1 linux linux 4096 Jun 1 11:23 and a red box around the d
+The first character in our permissions (d) tells us that the files are actually both directories. If this character was a hyphen character (-) we know that it's a regular file. 
+
+An image with the text drwxr-xr-x 1 linux linux 4096 Jun 1 11:23 and a red box around the rwx
+The next three characters (rwx in our above example) identify the permissions for the user who owns the file. The owner of the file is identified by looking at the third column in the file list. In the above example, the user linux owns the current directory (also known as ‘.’) and the user root owns the parent directory (aka ..). The permissions rwx tell us that the owners of these folders have read, write, and execute permissions on their respective directories.
+
+An image with the text drwxr-xr-x 1 linux linux 4096 Jun 1 11:23 and a red box around the r-x
+The second set of three characters (r-x above) identify the permissions for users who are part of a specific group. In the above examples, users in the linux group have read and execute permissions on the current directory, and users in the root group have read and execute permissions on the parent directory.
+
+An image with the text drwxr-xr-x 1 linux linux 4096 Jun 1 11:23 and a red box around the r-x
+Finally, the last three characters identify the permissions for everyone else on the system. If the user isn’t the owner of a file, or part of the group that owns the file, these are the permissions that apply to that user.
+
+Numerical Notation
+Sometimes, Linux file permissions are represented by a numerical value instead of the 10 characters explained above. Each file permission variant has a different numerical value associated with it (see below table) which can be converted into the text representation for permissions. 
+
+0 | ---
+1 | --x
+2 | -w-
+3 | -wx
+4 | r--
+5 | r-x
+6 | rw-
+7 | rwx
+
+For example, if given the numerical representation 754, you can convert each digit into the relevant file permission. 7 represents rwx, 5 represents r-x, and 4 represents r--. So we know…
+
+The owner of the file has read, write, and execute permissions
+The group members have read and execute permissions
+Everyone else has only read permissions.
+Setting permissions
+A user with write permissions on a file can change its permissions to enable or restrict access to it. Typically, the chmod command is used to update permissions of a file or folder.
+
+The chmod command can change the permissions of a file based on the parameters you specify. You can either specify a numerical value (e.g., chmod 755 file) or, if you’re updating permissions for the current user, based on the action you wish to perform. For example, chmod -g +x file would add the executable file permission to all group members for a file. Similarly, removing the write permissions for the current user would be via the command chmod -w file.
+
+Special File Permissions
+There are three special permissions that can be used to override some behaviours. Each has its own use case.
+
+Set User ID (SUID)
+When this special permission is applied, it forces that file to run as the file owner, not as the user who started the file. When reading file permissions, the SUID bit can be seen as an S in place of the owner’s execute permission, as seen in the example below:
+
+-rwSr--r-- 1 root root 4096 May 10 2018 myFile
+
+Set Group ID (SGID)
+Essentially, this is the same as the SUID permission, only this is set at a group level not a user level. As with SUID, this is shown as an S character in place of the execute permission – but this time, it’s the group permission changed.
+
+-rw-r-Sr-- 1 root root 4096 May 10 2018 anotherFile
+
+StickyBit
+When creating files and directories, permissions are inherited from the parent. There are times when it is necessary to create a file that cannot be deleted in a user’s directory. StickyBit allows this as it is a special mode, meaning only the owner of the file can delete it. It is denoted by a 't' at the end of the permissions string, shown in the example below.
+
+-rwxr-xr-t 1 root root 4096 May 10 2018 stickyFile
