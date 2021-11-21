@@ -48,3 +48,13 @@ find / -name [filename] –  Search all directories for a file
  find /[directory-to-search] -name ‘[word]*’ – Search a directory for a filename that contains a word
 find /[directory-to-search] -perm [permissions as numerical value] –  Search a directory for everything that has particular user permissions
 find /[directory-to-search] -user –  Search a directory for everything owned by a particular use
+
+
+Sort
+The sort command is used to sort data within a file. This command assumes that everything within the file is ASCII (text the computer can read) and can support sorting in many ways. You can sort files in ascending order (for example, A–Z or 0–9) or descending order (for example, Z–A or 9–0), but sort also supports various sorting methods. Run the command sort --help to see all options possible with sort.
+
+
+At its core, sort can be used simply to sort in a file, sort [filename]. By default, this will make the contents of the file output into the command line in alphabetical order, with numbers ahead of letters. If you wanted the reverse of this, you would use the parameter -r.
+
+
+
