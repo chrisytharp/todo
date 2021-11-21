@@ -1,0 +1,39 @@
+Linux has a wonderful tool that allows users to run multiple terminal sessions at once in the same window. The screen command can be used to switch between different terminal sessions all from one terminal prompt. In this lab you will use screen to create, connect to, and disconnect from existing screen sessions using the command line.
+
+Screen
+Screen is an incredibly useful tool for system administrators. It allows multiple terminal sessions to run at the same time without needing to be closed down. It’s particularly beneficial as, unlike the standard terminal window, it will allow you to resume a task. 
+
+So, why don't we just use multiple terminal windows? Well, if you're using multiple windows, what happens if you accidentally disconnect from the system you’re interacting with? Or you accidentally hit CTRL+C? Any programs or processes in progress will be exited and you'll have to start the whole process again, which could be hours of effort. With screen, if that connectivity drops or you accidentally hit CTRL+C, you don't lose your progress.
+
+Using screen
+To run the screen tool, simply type the command screen. If you want to see if any screens are already running, you can use the ls command with screen to list them out: screen -ls.
+
+Image that says: linux@screen:~$ screen -ls There are screens on: 143.token2(06/07/2021 04:46:03 PM)(Detached) 115.token1(06/07/2021 04:45:58 PM)(Detached) 2 Sockets in /run/screen/S-linux.
+Creating and naming a new screen
+To create a new screen with a custom-defined name, use the -S parameter. This would look like screen -S [new-screen-name]. It's useful to have descriptive names for the screens you create, making it easier to recall each screen's purpose.
+
+Connecting to an existing screen
+You can connect to an existing screen using the -r parameter followed by the screen name. It's handy to list out the already existing screens first, just in case. If a name hasn’t been specified, screen will create a default name for it and they’re not always the most pleasant to type in. 
+
+Image that says: linux@screen:~$ screen -r screen1
+Detaching from a screen
+Detaching from a screen is easy, but not done via a command. To detach from a screen you need to press the ‘CTRL’ key on the keyboard in conjunction with the ‘A’ and ‘D’ keys.
+
+CTRL + A + D
+
+Note that detaching from a screen simply removes you from using that screen and back to your original terminal window. It doesn’t end or kill the screen session.
+
+Killing screen sessions
+To completely kill – not just detach – a screen you need to Konami code the keyboard. Press and hold ‘CTRL’ on the keyboard then press ‘A’. This removes your cursor from the screen’s command line. If you find yourself accidentally typing, simply press ‘CTRL + A’ again.
+
+Once you’ve removed your cursor, press and hold ‘SHIFT’ and then ‘K’ on the keyboard. This will provide a prompt at the bottom left of the screen, asking if you wish to kill the session. Press ‘Y’ for yes or ‘N’ for no if you want to continue to use it. Entering ‘Y’ will kill the screen entirely. 
+ 
+
+CTRL + D Or  CTRL + A and then SHIFT + K followed by Y when prompted.
+
+Commands overview
+Screen -ls –  list all currently active screens
+Screen -r [existing-screen-name] –  connect to an already existing screen
+Screen -S [desired-screen-name] –  create a new session and give it a name
+Ctrl A + D –  detach from a screen
+Ctrl + A, then Shift + K, then Y –  kill a screen session
