@@ -1,0 +1,18 @@
+Brute forcing with Aircrack-ng
+Aircrack-ng is a tool suite used to assess network security. Used by penetration testers, it can capture wireless traffic, fake access points and crack WPA/WEP networks that use pre-shared keys. 
+
+Brute forcing is time intensive, and it uses lots of processing power. Creating a word-list is similar in this respect. 
+
+It is important that the word-list contains the correct password, or Aircrack-ng will not be able to determine the key.
+
+Running a dictionary attack against a capture file with Aircrack-ng is quite straightforward: simply specify the word-list and the .cap file you wish to crack, and Aircrack-ng will iterate through the list and identify the correct passphrase.
+
+aircrack-ng -w <WORDLIST FILE> <CAPTURE FILE>
+
+
+Aircraick-ng pcap and mac address of host
+For example:
+
+This is a dump from a WEP protected network (“Lab1″/00:24:a8:b9:f4:41). 
+
+It contains enough packets to use aircrack-ng to reveal the PSK (e.g. “aircrack-ng -zb 00:24:a8:b9:f4:41 cap-01.cap”. 
