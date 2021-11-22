@@ -16,3 +16,6 @@ For example:
 This is a dump from a WEP protected network (“Lab1″/00:24:a8:b9:f4:41). 
 
 It contains enough packets to use aircrack-ng to reveal the PSK (e.g. “aircrack-ng -zb 00:24:a8:b9:f4:41 cap-01.cap”. 
+
+
+note: four-way handshake use as a pass key -> PMK
