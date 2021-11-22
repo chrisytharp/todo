@@ -1,0 +1,40 @@
+Steganography
+Quick Summary
+Steganography refers to a series of techniques that are used to hide one form of content inside another. The most common application of this is image steganography, where data (typically text and secret messages) is hidden inside an image. This lab will look at several techniques that can be used to hide information in an image file.
+
+What's on this page?
+What is steganography?
+Polyglot files
+LSB
+Steganalysis
+Steghide
+Exiftool
+In this lab
+What is steganography?
+Steganography is the process of hiding secret data within an ordinary message or file to avoid detection. It's often used to hide any type of digital file within another form of digital file. While there are many legitimate uses for this technique, it is often used with malicious intent; for example, malware authors can use it to hide malicious code in legitimate file thereby obscuring the transmission of the code.
+
+Polyglot files
+Polyglot files is a term that can be used to describe a file that can be more than one thing or a script written in multiple languages. Polyglot files are often used to bypass protection based on file types; for example, by abusing the way browsers load content, we can create something like a GIF image file that contains malicious JavaScript code. If we tell the browser to treat it as an image, it loads the image. If we tell it that the file is JavaScript, it will load it as JavaScript and execute the malicious code. This can also apply to files on the OS. It's possible to have a valid image file that loads a picture in an image viewer; however, if you change the extension, it will become a valid compressed archive and the contents of the archive can be extracted. 
+
+LSB
+Another very common technique is LSB (Least Significant Bit) steganography. This is the principle that you can encode text and data in the pixels of an image without adversely affecting the image. Pixels in a JPEG are made from an RGB value. If you were to modify the first bit of each pixel you could encode data, but to the human eye it would be imperceptible.
+
+Steganalysis
+Steganalysis is the process of identifying the existence of hidden data rather than extracting the hidden data. Doing so helps with the identification of tools used to hide the data, which will aid with extracting hidden data. One common technique to identify whether data has been hidden is to check the hash of a file and compare it with an original; for example, a company logo. If data has been embedded, the file structure will have changed which means the hash will be very different to the original file. 
+
+By its very nature, there are an almost infinite number of ways a user could hide their data, making steganalysis a difficult task. The easiest way to check a file is to compare it to the original and look for modifications. 
+
+One method is shrinking the content you want to hide in the image. Examples of this include:
+
+Adding a small QR Code.
+Matching the font colour to a similar colour in the image, e.g., dark blue text on a black background.
+These may not be the most sophisticated of techniques, but they can still be used to evade detection. 
+
+Steganalysis also applies to audio. Check out the following lab for more information.
+
+Steghide
+There are several tools that can encode and decode the LSB technique, but the best known is Steghide – a command line tool to encode and optionally encrypt data into an image. Steghide will always ask you for a passphrase but in some cases there may not be any need to enter one.
+
+Exiftool
+ExifTool is an open-source tool used to read, write, and manipulate metadata of a huge range of different file types. Image metadata often contain different tags describing the information about the image, like date, copyright, location etc. ExifTool can be used to write and manipulate tags in image metadata. It can also be used to identify the original type of a file masquerading as another. 
+
