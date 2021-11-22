@@ -1,0 +1,45 @@
+## Symmetric
+# Decrypt a file using AES-256:
+openssl enc -aes-256-cbc -d -pbkdf2 -nosalt -in [input file] -out [output file]
+# Decrypt a file using RC4:
+openssl enc -rc4 -d -pbkdf2 -nosalt -in [input file] -out [output file]
+# Decrypt a file using Triple DES:
+openssl enc -des-ede3-cbc -d -pbkdf2 -nosalt -in [input file] -out [output file]
+## Asymmetric
+# Decrypt a file using an RSA private key
+openssl rsautl -decrypt -inkey [private key file] -in [input file] -out [output file]
+
+Lab Task 1: Become a CA
+In this lab you will become a root CA in order to issue certificates to others. CAs (Certificate Authorities) underpin the security of a PKI and the services which it supports, making them the focus of targeted attacks from adversaries looking for any weaknesses in the chain of trust. 
+
+There are some commercial CAs considered ‘Root CAs’. Root CAs provide the ‘root of trust’ in PKI, and unlike other certificates which are usually signed by another CA, the root certificate is self-signed by the Root CA.
+
+The following OpenSSL command will generate the self-signed certificate for our CA. This and all other commands in the lab must run from the ‘imlCA’ directory, so please navigate here before beginning the tasks.
+
+openssl req -new -x509 -keyout ca.key -out ca.crt -config openssl.cnf
+You will be prompted for certain pieces of information as well as a password which can be used when signing certificates in the future, so do not forget this! Two files will be outputted: ca.key which contains the CA’s private key, and ca.crt which contains the CA’s public key certificate. Set the email address as user@imlpkica.com. Not all fields will need to be completed; for some fields there will be a default value, and if you enter ‘.’ the field will be left blank.
+
+Lab Task 2: Generate a signed server certificate (IMLLabPKI.com)
+As a Root CA, you can now sign digital certificates for others. You are acting as a hypothetical company and will need to go through the following steps to claim a digital certificate from a CA.
+
+The company first needs to generate its own public/private key pair. The following command will do this for you. A password will be required to encrypt the private key and both keys will be stored in a file called myserver.key.
+
+openssl genrsa -aes128 -out myserver.key 1024
+When a company has the key pair, the next step is to generate a certificate signing request (CSR), which includes information on the organisation’s common name and country as well as the server’s public key, used by the CA to generate a signed certificate. Set the common name as IMLLabPKI.com.
+
+openssl req -new -key myserver.key -out myserver.csr -config openssl.cnf
+The final step is for the CA (created in the first step) to generate a certificate for our web server. To generate certificates in the real world, CSR files will be sent to a trusted CA for their signature. In our scenario, we will use the CA that we created earlier and already control. The following command will turn the myserver.csr CSR into a X509 certificate called myserver.crt, using the CAs ca.crt and ca.key.
+
+openssl ca -in myserver.csr -out myserver.crt -cert ca.crt -keyfile ca.key -config openssl.cnf
+Lab Task 3: Deploy certificates
+Now everything is set up to obtain our certificate, we can begin to explore how public key certificates are used to secure web browsing. OpenSSL allows you to launch a simple web server with the previously created certificates. This is achieved using the s_server command. First, combine the secret key and certificate into one file.
+
+cp myserver.key myserver.pem
+cat myserver.crt >> myserver.pem
+And then launch the web server using the newly created myserver.pem.
+
+openssl s_server -cert myserver.pem -WWW
+The s_server command is commonly used for testing and debugging purposes, so it will work for our use case; however, in the real world a certain amount of server configuration must be done. The server will run on port 4433 by default and can be accessed using the address https://IMLLabPKI.com:4433/index.html. Visit this page and observe what occurs.
+
+This error would not occur in a real-world scenario because most browsers are pre-loaded with trusted Root CA certificates. We must therefore load our CA's certificate into the browser to accept our web server’s signed certificate. To do this, open Firefox’s settings and follow Preferences > Privacy and Security > View Certificates > Authorities > Import, then choose your previously created Root CA certificate, ensuring you check the box that confirms the certificate can identify websites.
+
