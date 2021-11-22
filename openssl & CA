@@ -9,6 +9,10 @@ openssl enc -des-ede3-cbc -d -pbkdf2 -nosalt -in [input file] -out [output file]
 # Decrypt a file using an RSA private key
 openssl rsautl -decrypt -inkey [private key file] -in [input file] -out [output file]
 
+#Encrypt 
+openssl enc -aes-256-cbc -in un_encrypted.data -out encrypted.data
+
+
 Lab Task 1: Become a CA
 In this lab you will become a root CA in order to issue certificates to others. CAs (Certificate Authorities) underpin the security of a PKI and the services which it supports, making them the focus of targeted attacks from adversaries looking for any weaknesses in the chain of trust. 
 
