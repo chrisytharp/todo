@@ -28,3 +28,31 @@ High
 Cookie components are always prepared in pairs. The main pair is name-value; this will define the name of the cookie and the value of the name. The second pair is the attribute-value pair; this will define an attribute of the cookie and the value of the attribute. Below is an example of what Set-Cookie syntax looks like.
 
 Set-Cookie: <cookie-name>=<cookie-value>; Domain=<domain-value>; Secure; HttpOnly
+----------------------------------
+Cookie Manipulation
+
+
+Cookie manipulation is taking a cookie and modifying it to obtain unintended behavior determined by the web developer. Cookie manipulation is possible because cookies are stored locally on your host system, meaning you have complete control over them and modify them as you please.
+
+To begin modifying and manipulating cookies, we need to open our developer tools. In Google Chrome, developer tools are known as the "Chrome Developer Tools," and in Mozilla Firefox, they are known as the "Firefox Developer Tools."
+
+Developer tools can be accessed by pressing F12 or Ctrl+Shift+I. Once developer tools are open, to access your cookies, navigate to the Storage tab in Firefox or Application tab in Chrome/Edge; select the Cookies dropdown on the left-hand side of the console.
+
+
+
+Cookie values may seem random at first; however, they often have an encoded value or meaning behind them that can be decoded to a non-arbitrary value such as a Javascript object.
+
+From an attacker's perspective, you can decode the cookie value to identify the underlying objects. Once you have identified the underlying objects, you can modify them to what you want. To use the cookie, you will need to encode it back to the original encoding and replace the cookie value. Below is an example of a decoded cookie value.
+
+{firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"
+
+Now that we have all of the pieces of cookies and how to manipulate them, we can put them all together to gain unintended access.
+
+Below is a summary of how cookie values could be manipulated.
+
+Obtain a cookie value from registering or signing up for an account.
+Decode the cookie value.
+Identify the object notation or structure of the cookie.
+Change the parameters inside the object to a different parameter with a higher privilege level, such as admin or administrator.
+Re-encode the cookie and insert the cookie into the value space; this can be done by double-clicking the value box.
+Action the cookie; this can be done by refreshing the page or logging in.
