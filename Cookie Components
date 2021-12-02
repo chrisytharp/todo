@@ -24,3 +24,7 @@ SameParty	Extends functionality of SameSite attribute to First-Party sets.
 (indicated by a checkmark)
 Priority	Defines the importance of a cookie. Determines whether it should be removed or held on to
 High
+--------------------------------
+Cookie components are always prepared in pairs. The main pair is name-value; this will define the name of the cookie and the value of the name. The second pair is the attribute-value pair; this will define an attribute of the cookie and the value of the attribute. Below is an example of what Set-Cookie syntax looks like.
+
+Set-Cookie: <cookie-name>=<cookie-value>; Domain=<domain-value>; Secure; HttpOnly
