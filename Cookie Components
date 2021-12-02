@@ -1,0 +1,26 @@
+Cookie Components
+
+Cookies are made up of 11 different components; you can find an explanation of each component in the table below.
+
+Component	Purpose	Example
+Name	Unique cookie identifier (arbitrarily set by web-server). Always paired with the value component.	SessionID
+Value	Unique cookie value (arbitrarily set by web-server). Always paired with the name component
+sty1z3kz11mpqxjv648mqwlx4ginpt6c
+Domain	Originating domain of the cookie. Sets the scope of the cookie.
+.tryhackme.com
+Path	Local path to cookie. Sets the scope of the cookie.
+/
+Expires/Max-age	Date/time at which cookies expires
+2022-11-11T15:39:04.166Z
+Size	Disk size of the cookie in bytes. This is typically {Name+Value}
+91
+HttpOnly	Cookie cannot be accessed through client-side scripts
+(indicated by a checkmark)
+Secure	Cookie is only sent over HTTPS
+(indicated by a checkmark)
+SameSite	Specifies when a cookie is sent through cross-site requests
+none
+SameParty	Extends functionality of SameSite attribute to First-Party sets. 
+(indicated by a checkmark)
+Priority	Defines the importance of a cookie. Determines whether it should be removed or held on to
+High
