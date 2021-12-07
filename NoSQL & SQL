@@ -47,6 +47,22 @@ exploiting the logic of the login query by injecting a JSON object
        We injected a JSON objection {"$ne": "XYZ"}  in the password field, and we changed the logic to become as follows:
        We are telling MongoDB to find a document (user) with a username equal to admin and his password is not equal to xyz, which turns 
           this statement to TRUE because the admin's password is not xyz
+Exploiting NoSQL injection
+      1- find entry point that doesn't sanitize user's input
+      2- understand how the web application passes the request to the database
+      3- Sometimes, the web app accepts the user's input via GET or POST queries & sometimes web applications accept a JSON object(via API)
+ NoSQL query injections have different forms:
+      interact with MongoDB via GET or POST
+                                         "http://example.thm.labs/search?username=admin&role[$ne]=user"
+      To perform NoSQL injection, first, you need to bypass the login page
+
+Normal query "http://example.thm.labs/search?username=ben&role=user"
+
+list all usernames that have a user role:
+            "http://example.thm.labs/search?username[$ne]=ben&role=user"
+      
+                                         
+          
 
 
 
