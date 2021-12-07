@@ -1,0 +1,58 @@
+Similar to relational databases (such as MySQL and MSSQL), MongoDB consists of databases, tables, fields but with different names where 
+      Collections are similar to tables or views in MySQL and MSSQL.
+      Documents are similar to rows or records in MySQL and MSSQL.
+      Fields are similar to columns in MySQL and MSSQL.
+      
+      https://docs.mongodb.com/manual/reference/operator/query/
+
+Documents in (MongoDB are objects stored in a format called BSON) which supports JSON data types for document storing.
+
+query operators between MongoDB (NoSQL/non-relational) and MySQL(SQL/ relational):
+      $and equivalent to AND in MySQL
+      $or equivalent to OR in MySQL
+      $eq equivalent to = in MySQL
+      
+Interacting with a MongoDB server: (Default PORT : 27017)
+     show - command to list all the databases 
+            show databases
+    use command is used to connect to a database if it exists or create a new one if it doesn't exist
+
+Once the database is created, we can create two new collections, named users and roles using the 
+    db.createCollection() function, and then show all available collections within the database 
+    
+    > use test
+    > db.createCollection("users")
+    > db.creteCollection("roles")
+    > db.getCollectionNames();
+create a document within the users collection and insert data into it //MongoDB automatically creates a unique ID called _id for each document within the collection    
+    
+    > db.users.insert({id:"1", username: "admin", email: "admin@thm.labs", password: "idk2021!"})
+    > db.users.find()
+    > db.users.update({id:"2"}, {$set: {username: "chris"}});               <- update user with id=2 with new username
+    > db.users.remove({'id':'2'})                                           <- remove user id = 2 from useers colletction(aka table)
+
+Bypassing login pages
+Login page may use:  'db.users.find({query})' /or/ 'db.users.findOne(query)' functions
+            > db.users.findOne({username: "admin", password: "adminpass"})
+MongoDB operators used in injections:
+      $eq - matches records that equal to a certain value
+      $ne - matches records that are not equal to a certain value
+      $gt - matches records that are greater than a certain value.
+      $where - matches records based on Javascript condition
+      $exists - matches records that have a certain field
+      $regex - matches records that satisfy certain regular expressions
+      
+exploiting the logic of the login query by injecting a JSON object            
+    > db.users.findOne({username: "admin", password: {"$ne":"xyz"}})
+       We injected a JSON objection {"$ne": "XYZ"}  in the password field, and we changed the logic to become as follows:
+       We are telling MongoDB to find a document (user) with a username equal to admin and his password is not equal to xyz, which turns 
+          this statement to TRUE because the admin's password is not xyz
+
+
+
+
+
+
+
+
+
