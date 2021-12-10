@@ -1,0 +1,19 @@
+Passive reconnaissance activities include many activities, for instance:
+
+    Looking up DNS records of a domain from a public DNS server.
+    Checking job ads related to the target website.
+    Reading news articles about the target company.
+
+Active reconnaissance, on the other hand, cannot be achieved so discreetly. It requires direct engagement with the target. Think of it like you check the 
+locks on the doors and windows, among other potential entry points.
+
+https://dnsdumpster.com/
+
+Purpose	Commandline Example
+Lookup WHOIS record	whois tryhackme.com
+Lookup DNS A records	nslookup -type=A tryhackme.com
+Lookup DNS MX records at DNS server	nslookup -type=MX tryhackme.com 1.1.1.1
+Lookup DNS TXT records	nslookup -type=TXT tryhackme.com
+Lookup DNS A records	dig tryhackme.com A
+Lookup DNS MX records at DNS server	dig @1.1.1.1 tryhackme.com MX
+Lookup DNS TXT records	dig tryhackme.com TXT
