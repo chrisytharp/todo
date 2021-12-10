@@ -1,3 +1,5 @@
+rooms (https://tryhackme.com/room/winprivesc)(https://tryhackme.com/room/windows10privesc)(https://tryhackme.com/room/windowsprivescarena)
+
 User Enumeration
 ----------------
 Current user’s privileges:                    whoami /priv
