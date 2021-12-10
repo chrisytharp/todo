@@ -1,0 +1,2 @@
+$telnet x.x.x.x port
+$telnet 8.8.8.8 53
