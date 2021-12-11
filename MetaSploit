@@ -5,4 +5,22 @@ Metasploit Framework: open-source CmdLine  // useful for vulnerability research
       Modules: exploit modules, scanner modules, payload modules, etc.
       Tools: Stand-alone tools to help vulnerability research, vulnerability assessment, or pen testing 
              Some of these tools are msfvenom, pattern_create and pattern_offset. 
+Modules are small components within the Metasploit framework that are built to perform a specific task, such as exploiting a vulnerability, scanning a target, 
+or performing a brute-force attack
 
+!!!Recurring concepts: vulnerability, exploit, and payload
+                                Vuln: A design, coding, or logic flaw affecting the target system.
+                                Exploit: A piece of code that USES a vulne present on the target system.
+                                Payload: An exploit will take advantage of a vulnerability.
+//MODULES
+Auxiliary: Any supporting module, such as scanners, crawlers and fuzzers, etc..
+    IN->  /opt/metasploit-framework-5101/modules# tree -L 1 auxiliary/
+Encoders: Encoders will allow you to encode the exploit and payload in the hope that a signature-based antivirus solution may miss them.
+    IN->  /opt/metasploit-framework-5101/modules# tree -L 1 encoders/
+Evasion: While encoders will encode the payload, they should not be considered a direct attempt to evade antivirus software.
+    IN->  /opt/metasploit-framework-5101/modules# tree -L 2 evasion/
+Exploits: Exploits, neatly organized by target system.
+    IN->  /opt/metasploit-framework-5101/modules# tree -L 1 exploits/
+NOPs: NOPs (No OPeration) do nothing, literally.
+    Intel x86 are represented as 0x90, CPU will do nothing for ONE cycle-> often used as a buffer to achieve consistent payload size
+    IN->  /opt/metasploit-framework-5101/modules# tree -L 1 nops/    
