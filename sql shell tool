@@ -1,0 +1,7 @@
+sqsh (pronounced skwish), an interactive database shell
+
+A simple syntax would be sqsh -S server -U username -P password, where:
+
+-S server is used to specify the server, for example -S 10.10.30.124
+-U username is used to provide the username; for example, -U sa is the username that we have enabled.
+-P password lets us specify the password.
