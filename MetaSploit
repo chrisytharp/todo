@@ -30,3 +30,18 @@ Payloads: Payloads are codes that will run on the target system.
             Singles: Self-contained payloads (add user, launch notepad.exe, etc.) that do not need to download an additional component to run.
             Stagers: Responsible for setting up a connection channel between Metasploit and the target system. Useful when working with staged payloads. “Staged payloads” will first upload a stager on the target system then download the rest of the payload (stage). This provides some advantages as the initial size of the payload will be relatively small compared to the full payload sent at once.
             Stages: Downloaded by the stager. This will allow you to use larger sized payloads.
+                Metasploit has a subtle way to help you identify single (also called “inline”) payloads and staged payloads.
+                        "generic/shell_reverse_tcp"
+                        "windows/x64/shell/reverse_tcp"
+                Both reverse Windows shells. 1st is an inline (or single) payload, as indicated by the “_” between “shell” and “reverse”. 2nd is a staged payload, as indicated by the “/” between “shell” and “reverse”.
+Post: Post modules will be useful on the final stage of the penetration testing process listed above, post-exploitation.
+    IN->  /opt/metasploit-framework-5101/modules# tree -L 1 post/
+    
+    
+    
+    
+    
+    
+                        
+                        
+                        
