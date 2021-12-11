@@ -11,3 +11,14 @@ To display the table names, you could use the following syntax, SELECT * FROM ta
 SELECT * is used to return specific columns (attributes). * refers to all the columns.
 FROM table_name to specify the table you want to read from.
 WHERE condition to specify the rows (entities).
+
+ query, SELECT * FROM reindeer.dbo.names;. This SQL query should dump all the contents of the table names from the database reindeer. Note that the ; 
+ indicates the end of the SQL query, while go sends a SQL batch to the database.
+
+see if we can run MS Windows commands while interacting with the database. Some MS SQL Servers have xp_cmdshell enabled. If this is the case, we might have access to something similar to a command prompt.
+
+The command syntax is xp_cmdshell 'COMMAND';. Let’s try a simple command, whoami, which shows the user running the commands. In the terminal output below, after connecting to MS SQL Server, we tried 
+xp_cmdshell 'whoami';
+and we can see that the user is nt service\mssqlserver. This means that any command we pass to xp_cmdshell will run as nt service\mssqlserver
+
+"type filename" to display the contents of a file
