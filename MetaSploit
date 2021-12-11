@@ -1,1 +1,8 @@
+Metasploit Pro: GUI
+Metasploit Framework: open-source CmdLine  // useful for vulnerability research 
+    main components:
+      msfconsole: The main command-line interface.
+      Modules: exploit modules, scanner modules, payload modules, etc.
+      Tools: Stand-alone tools to help vulnerability research, vulnerability assessment, or pen testing 
+             Some of these tools are msfvenom, pattern_create and pattern_offset. 
 
