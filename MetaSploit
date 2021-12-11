@@ -36,6 +36,9 @@ Payloads: Payloads are codes that will run on the target system.
                 Both reverse Windows shells. 1st is an inline (or single) payload, as indicated by the “_” between “shell” and “reverse”. 2nd is a staged payload, as indicated by the “/” between “shell” and “reverse”.
 Post: Post modules will be useful on the final stage of the penetration testing process listed above, post-exploitation.
     IN->  /opt/metasploit-framework-5101/modules# tree -L 1 post/
+----------------------------
+MSFCONSOLE
+----------------------------
     
     
     
