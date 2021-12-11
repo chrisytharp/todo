@@ -5,3 +5,9 @@ A simple syntax would be sqsh -S server -U username -P password, where:
 -S server is used to specify the server, for example -S 10.10.30.124
 -U username is used to provide the username; for example, -U sa is the username that we have enabled.
 -P password lets us specify the password.
+
+To display the table names, you could use the following syntax, SELECT * FROM table_name WHERE condition.
+
+SELECT * is used to return specific columns (attributes). * refers to all the columns.
+FROM table_name to specify the table you want to read from.
+WHERE condition to specify the rows (entities).
