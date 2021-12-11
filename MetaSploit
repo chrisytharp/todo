@@ -11,7 +11,7 @@ or performing a brute-force attack
 !!!Recurring concepts: vulnerability, exploit, and payload
                                 Vuln: A design, coding, or logic flaw affecting the target system.
                                 Exploit: A piece of code that USES a vulne present on the target system.
-                                Payload: An exploit will take advantage of a vulnerability.
+                                Payload: An exploit will take advantage of a vulnerability.get shell, install backdoor, or POC by remotely launching calc.exe
 //MODULES
 Auxiliary: Any supporting module, such as scanners, crawlers and fuzzers, etc..
     IN->  /opt/metasploit-framework-5101/modules# tree -L 1 auxiliary/
@@ -24,3 +24,9 @@ Exploits: Exploits, neatly organized by target system.
 NOPs: NOPs (No OPeration) do nothing, literally.
     Intel x86 are represented as 0x90, CPU will do nothing for ONE cycle-> often used as a buffer to achieve consistent payload size
     IN->  /opt/metasploit-framework-5101/modules# tree -L 1 nops/    
+Payloads: Payloads are codes that will run on the target system.
+    IN->  /opt/metasploit-framework-5101/modules# tree -L 1 payloads/
+        3 different Dirs: SINGLES, STAGER & STAGES
+            Singles: Self-contained payloads (add user, launch notepad.exe, etc.) that do not need to download an additional component to run.
+            Stagers: Responsible for setting up a connection channel between Metasploit and the target system. Useful when working with staged payloads. “Staged payloads” will first upload a stager on the target system then download the rest of the payload (stage). This provides some advantages as the initial size of the payload will be relatively small compared to the full payload sent at once.
+            Stages: Downloaded by the stager. This will allow you to use larger sized payloads.
