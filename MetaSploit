@@ -40,16 +40,19 @@ Post: Post modules will be useful on the final stage of the penetration testing 
 MSFCONSOLE
 ----------------------------
 msf6>   history                     <-- shows cmd history
-msf6>   set / unset /unset all      <-- set/ unset options (setg/unsetg for setting global)
+msf6>   set / unset / unset all     <-- set/ unset options (setg/unsetg for setting global)
 msf6>   use                         <-- to use module       
 msf6>   show "options|payloads"     <-- show module (auxiliary, payload, exploit, etc.)
 msf6>   back                        <-- leave payload/exploit context
 msf6>   info                        <-- show more info on module (info exploit/windows/smb/ms17_010_eternalblue)
 msf6>   search "ms17-010"           <-- can conduct searches using CVE numbers, exploit names (eternalblue, heartbleed, etc.), or target system "search type:auxiliary telnet"    
------------------------------------------------------
-Eternal Blue     Target 192.1.1.1    Local 192.2.2.2 ----------------------------------------------------------------------------------------------
------------------------------------------------------
-    
-                        
-                        
-                        
+msf6>   background                  <-- background "meterpreter" session
+msf6>   sessions                    <-- view sessions
+msf6>   sessions -i "#"             <-- interact with session #
+msf6>   exploit -z                  <-- will run exploit (-z auto background session)
+msf6>   check                       <-- check if target is vuln (some modules supprt this)
+
+
+
+
+
