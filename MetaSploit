@@ -58,6 +58,8 @@ msf6>   nmap -sC [TARGET]           <-- nmap from msf
 msf6>   aux..(...) > run            <-- will execute scanner
 msf6>   scanner/smb/smb_version  |  auxiliary/scanner/netbios/nbname  |  auxiliary/scanner/http/http_version  |  smb_login "to brute force login"  
 
+-----MSF Database-----
+
 
 
 
