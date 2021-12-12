@@ -1,0 +1,10 @@
+2049/tcp open  mountd        1-3 (RPC #100005)
+
+
+Now that we have discovered an NFS service is listening, let’s check what files are being shared. We can do this using the command showmount.
+In the terminal below, we run showmount -e 10.10.12.24. The -e or --exports show the NFS server’s export list.
+
+Let’s try to mount the shares we have discovered. We can create a directory on the AttackBox using mkdir tmp1, where tmp1 is the directory’s name.
+Then we can use this directory  we created to mount the public NFS share using: mount 10.10.12.24:/my-notes tmp1
+
+ls /tmp1
