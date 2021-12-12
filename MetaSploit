@@ -52,6 +52,15 @@ msf6>   sessions -i "#"             <-- interact with session #
 msf6>   exploit -z                  <-- will run exploit (-z auto background session)
 msf6>   check                       <-- check if target is vuln (some modules supprt this)
 
+-----SCANNING-----
+msf6>   search portscan             <-- find portscanners in msf
+msf6>   nmap -sC [TARGET]           <-- nmap from msf
+msf6>   aux..(...) > run            <-- will execute scanner
+msf6>   scanner/smb/smb_version  |  auxiliary/scanner/netbios/nbname  |  auxiliary/scanner/http/http_version  |  smb_login "to brute force login"  
+
+
+
+
 
 
 
