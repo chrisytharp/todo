@@ -10,8 +10,8 @@ or performing a brute-force attack
 
 !!!Recurring concepts: vulnerability, exploit, and payload
                                 Vuln: A design, coding, or logic flaw affecting the target system.
-                                Exploit: A piece of code that USES a vulne present on the target system.
-                                Payload: An exploit will take advantage of a vulnerability.get shell, install backdoor, or POC by remotely launching calc.exe
+                                Exploit: A piece of code that USES the vuln code present on the target system to exploit it
+                                Payload: An EXPLOIT will take advantage of a vulnerability.get shell, install backdoor, or POC by remotely launching calc.exe
 //MODULES
 Auxiliary: Any supporting module, such as scanners, crawlers and fuzzers, etc..
     IN->  /opt/metasploit-framework-5101/modules# tree -L 1 auxiliary/
@@ -39,8 +39,16 @@ Post: Post modules will be useful on the final stage of the penetration testing 
 ----------------------------
 MSFCONSOLE
 ----------------------------
-    
-    
+msf6>   history                     <-- shows cmd history
+msf6>   set / unset                 <-- set/ unset options (setg/unsetg for setting global)
+msf6>   use                         <-- to use module       
+msf6>   show "options|payloads"     <-- show module (auxiliary, payload, exploit, etc.)
+msf6>   back                        <-- leave payload/exploit context
+msf6>   info                        <-- show more info on module (info exploit/windows/smb/ms17_010_eternalblue)
+msf6>   search "ms17-010"           <-- can conduct searches using CVE numbers, exploit names (eternalblue, heartbleed, etc.), or target system "search type:auxiliary telnet"
+msf6>                                                                                          
+msf6>
+msf6>
     
     
     
