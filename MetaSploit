@@ -69,7 +69,7 @@ msf6>   workspace "-d|-a" wrkspanceName
 msf6>   db_nmap -sC -sV TARGET      <-- all results will be saved to db
 msf6>   "hosts|services"            <-- info relevant to hosts and services running on target systems
 
------MSF -----
+-----MSF VENOM-----
 msf6>
 msf6>
 msf6>
