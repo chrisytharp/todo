@@ -52,7 +52,7 @@ msf6>   sessions -i "#"             <-- interact with session #
 msf6>   "exploit|run" -z                  <-- will run exploit (-z auto background session)
 msf6>   check                       <-- check if target is vuln (some modules supprt this)
 C:\Windows\system32> Ctrl+Z | Ctrl+C  <-- C= abort | Z background 
-
+meterpreter>    search STRING       <-- meterpreter has a search 
 -----SCANNING-----
 msf6>   search portscan             <-- find portscanners in msf
 msf6>   nmap -sC [TARGET]           <-- nmap from msf
