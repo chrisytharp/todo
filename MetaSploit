@@ -8,6 +8,8 @@ Metasploit Framework: open-source CmdLine  // useful for vulnerability research
 Modules are small components within the Metasploit framework that are built to perform a specific task, such as exploiting a vulnerability, scanning a target, 
 or performing a brute-force attack
 
+Metasploit payloads can be initially divided into two categories; inline (also called single) and staged
+
 !!!Recurring concepts: vulnerability, exploit, and payload
                                 Vuln: A design, coding, or logic flaw affecting the target system.
                                 Exploit: A piece of code that USES the vuln code present on the target system to exploit it
