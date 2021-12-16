@@ -65,3 +65,19 @@ Using Gobuster:
 
 gobuster
 user@machine$ gobuster dir --url http://10.10.232.12/ -w /usr/share/wordlists/SecLists/Discovery/Web-Content/common.txt
+
+-------------Block Chain OSINT----------------------
+
+Blockchain technology is completely open while remaining anonymous; this comes with its pros and cons from an OSINT perspective; we can quickly identify specific
+identifiers but linking them can become difficult. Multiple tools aid in exploring the blockchain, including but not limited to,
+
+-Blocktrail
+-Bitcoin Who's Who
+-Graphsense
+-Block Explorer
+
+
+
+
+
+
