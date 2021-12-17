@@ -54,6 +54,7 @@ All requests to AWS services must be signed. This is typically done behind the s
 The signing process leverages IAM Access Keys. These access keys are one of the primary ways an AWS account is compromised.
 
 ----IAM Access Keys 
+
 IAM Access Keys consist of an "Access Key ID" and the "Secret Access Key" 
 Access Key IDs always begin with the letters 
 "AKIA" & are 20 characters long.  The Secret Access Key is 40 characters long.
@@ -63,7 +64,8 @@ AWS generates both strings; however, AWS doesn't make the Secret Access Key avai
 There is another type of credentials, short-term credentials, where the Access Key ID begins with the letters 
 "ASIA" and includes an additional string called the Session Token. 
 
-Conducting Reconnaissance with IAM
+--Conducting Reconnaissance with IAM ----------------------------------------------------------------------------------------------------------------------------------
+
 When you find credentials to AWS, you can add them to your AWS Profile in the AWS CLI. For this, you use the command:
 
 aws configure --profile PROFILENAME
