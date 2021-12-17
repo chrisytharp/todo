@@ -49,6 +49,48 @@ AuthenticatedUsers                    Can only list the bucket with             
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+AWS IAM
+All requests to AWS services must be signed. This is typically done behind the scenes by the AWS CLI or the various Software development Kits that AWS provides. 
+The signing process leverages IAM Access Keys. These access keys are one of the primary ways an AWS account is compromised.
+
+----IAM Access Keys 
+IAM Access Keys consist of an "Access Key ID" and the "Secret Access Key" 
+Access Key IDs always begin with the letters 
+"AKIA" & are 20 characters long.  The Secret Access Key is 40 characters long.
+These act as a user name for the AWS API.  
+AWS generates both strings; however, AWS doesn't make the Secret Access Key available to download after the initial generation. 
+
+There is another type of credentials, short-term credentials, where the Access Key ID begins with the letters 
+"ASIA" and includes an additional string called the Session Token. 
+
+Conducting Reconnaissance with IAM
+When you find credentials to AWS, you can add them to your AWS Profile in the AWS CLI. For this, you use the command:
+
+aws configure --profile PROFILENAME
+
+This command will add entries to the .aws/config and .aws/credentials files in your user's home directory. 
+
+Once you have configured a new profile with the new access keys, you can execute any command using this other set of credentials. For example, to list all the S3 Buckets 
+in the AWS account you have found credentials for, try:
+
+aws s3 ls --profile PROFILENAME
+
+A few other common AWS reconnaissance techniques are:
+1. Finding the Account ID belonging to an access key:
+        aws sts get-access-key-info --access-key-id AKIAEXAMPLE 
+2. Determining the Username the access key you're using belongs to
+        aws sts get-caller-identity --profile PROFILENAME
+3. Listing all the EC2 instances running in an account
+        aws ec2 describe-instances --output text --profile PROFILENAME
+4.Listing all the EC2 instances running in an account in a different region
+        aws ec2 describe-instances --output text --region us-east-1 --profile PROFILENAME
+
+AWS ARNs
+An Amazon ARN is their way of generating a unique identifier for all resources in the AWS Cloud. It consists of multiple strings separated by colons.
+
+The format is:
+        arn:aws:<service>:<region>:<account_id>:<resource_type>/<resource_name>
+
 
 
 
