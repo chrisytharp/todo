@@ -1,10 +1,2 @@
-```diff
-- text in red
-+ text in green
-! text in orange
-# text in gray
-@@ text in purple (and bold)@@
-```
-
--curl -X PUT "localhost:8080/urlstuffhere" -F "file=@filename" -b "JSESSIONID=cookievalue"
+curl -X PUT "localhost:8080/urlstuffhere" -F "file=@filename" -b "JSESSIONID=cookievalue"
 curl http://myservice --upload-file file.txt
