@@ -76,9 +76,11 @@ An Amazon ARN is their way of generating a unique identifier for all resources i
 format:
         arn:aws:<service>:<region>:<account_id>:<resource_type>/<resource_name>
 
+AWS SECRETS MANAGER https://docs.aws.amazon.com/secretsmanager/latest/userguide/tutorials_basic.html
 
+# aws secretsmanager list-secrets --profile PROFILENAME
 
-
+# aws secretsmanager get-secret-value --secret-id ValueFromPreviousNAMEvalue --profile PROFILENAME
 
 
 
