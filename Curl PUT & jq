@@ -3,3 +3,6 @@ curl -X PUT "localhost:8080/urlstuffhere" -F "file=@filename" -b "JSESSIONID=coo
 curl http://myservice --upload-file file.txt
 
 <span style="color:orange;">Word up</span>
+
+apt install jq (beautify json)
+cat test.json | jq
