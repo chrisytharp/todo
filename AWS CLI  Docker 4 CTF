@@ -82,6 +82,15 @@ AWS SECRETS MANAGER https://docs.aws.amazon.com/secretsmanager/latest/userguide/
 
 # aws secretsmanager get-secret-value --secret-id ValueFromPreviousNAMEvalue --profile PROFILENAME
 
+-------DOCKER---------------
+docker images                                   <-- see docker images stored on pc
+docker pull IMAGEnAME                           <-- pull image from repository to your computer
+docker run -it IMAGEnAME                        <-- run docker image
+docker save -o FileNme.tar IMAGEnAME            <-- pull and save docker image as filename 
+
+IN Linux it's always good to view Environmental Vars 
+printenv
+
 
 
 
