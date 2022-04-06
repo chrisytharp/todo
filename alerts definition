@@ -1,0 +1,10 @@
+True positive
+alert or detection was correctly identified.
+
+False positive    alert war set but non malicious
+
+False negative
+SIEM has failed to alert on a genuine threat
+
+True negative
+no alert was triggered and no threat was identified
