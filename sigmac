@@ -1,0 +1,81 @@
+Sigma
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Sigma is an open signature format that allows users to describe log events by standardizing the rule format. 
+Sigma was designed to be flexible and easy to write and can be used for any type of log file and corresponding SIEM. 
+Once a Sigma rule has been created, it can be easily converted into search queries for different SIEM systems such as Splunk, Elasticsearch, and QRadar. 
+This allows rules to be shared freely without being tied to any particular vendor.
+
+Sigma rules are written in YAML
+The example below used to detect when users on the system delete important backup files:
+
+                                    title: Deletes Backup Files
+                                    id: 06125661-3814-4e03-bfa2-1e4411c60ac3
+                                    status: experimental
+                                    description: Adversaries may delete or remove built-in operating system data and turn off services designed to aid 
+                                    in the recovery of a corrupted system to prevent recovery.
+                                    author: frack113
+                                    references:
+                                     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1490/T1490.md#atomic-test-6---windows---delete-backup-files
+                                    date: 2022/01/02
+                                    logsource:
+                                     product: windows
+                                     category: file_delete
+                                    detection:
+                                     selection:
+                                       Image|endswith: cmd.exe 
+                                       TargetFilename|endswith:
+                                         - '.VHD'
+                                         - '.bac'
+                                         - '.bak'
+                                         - '.wbcat'
+                                         - '.bkf'
+                                         - '.set'
+                                         - '.win'
+                                         - '.dsk'
+                                     condition: selection
+                                    falsepositives:
+                                     - Legitime usage 
+                                    level: medium
+                                    tags:
+                                     - attack.impact
+                                     - attack.t1490
+Sigmac
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Sigmac is the tool used to convert Sigma rule files into search queries supported by the various SIEM systems. 
+To correctly translate the Sigma rule file into an input that these systems will understand, Sigmac needs to be given the target (such as Elasticsearch) 
+using the -t flag, as well as a configuration file using the -c flag. 
+
+The configuration file must also be prepared. This file is used to map the search fields depicted in Sigma rule files to the target environment. Several pre-made 
+configuration files are shipped with Sigma, but these will not always map your own environment accurately. It's therefore the responsibility of the analyst to
+make the necessary changes to these configuration files so that Sigmac will produce usable query strings.
+
+The example below shows how to convert the Sigma rule file file_event_win_macro_file.yml into an Elastic query string using the Sigmac tool.
+
+sigmac -t 'es-qs' -c ~/Desktop/IML-Sigmac-Files/Config/iml-winlogbeat.yml ~/Desktop/IML-Sigmac-Files/Rules/file_event_win_macro_file.yml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
